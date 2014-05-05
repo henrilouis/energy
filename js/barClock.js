@@ -17,7 +17,7 @@ var BarClock = function(container, data, options){
 		centerRadius 			: 170,
 		centerWidth				: 15,
 		backgroundColor			: "#FFFFFF",
-		fontColor				: "#333333",
+		fontColor				: "#3F4953",
 		handColor				: "#E25942",
 		mainColor				: "#E25942",
 		colors					: ["#E25942","#F6CB51","#13A89E"],

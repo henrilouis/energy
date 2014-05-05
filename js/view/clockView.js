@@ -153,4 +153,8 @@ var ClockView = function(container,model){
 
 	};
 
+	this.update = function(args){
+		
+	}
+
 }
