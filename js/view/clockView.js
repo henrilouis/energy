@@ -12,7 +12,7 @@ var ClockView = function(container,model){
 
 		}
 
-	var barClock = new BarClock(container,data, options);
+	var bezierClock = new BarClock(container,data, options);
 
 	/********************************************************************************
 							Adding the icons for each category.
@@ -97,7 +97,7 @@ var ClockView = function(container,model){
 			}
 		}
 
-		barClock.update(data);
+		bezierClock.update(data);
 
 		gasLabel.html("SEK "+Math.round(gasCount()));
 		elecLabel.html("SEK "+Math.round(elecCount()));
