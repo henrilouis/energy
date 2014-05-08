@@ -105,7 +105,7 @@ var ClockView = function(container,model){
 
 	}
 
-	setInterval(updateClock,3000);
+	setInterval(updateClock,3000000);
 
 	/********************************************************************************
 							 Public variables and functions

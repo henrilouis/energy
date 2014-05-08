@@ -4,7 +4,8 @@ var BarClock = function(container, data, options){
 	var currentTime 			= date.getHours();
 	var svg, barCharts, centerPiece, backgroundCircle, handArc, arcGradient, clockHand, clockTime, 
 		gasIcon, electricityIcon, waterIcon, gasMeter, electricityMeter, waterMeter;
-		var lineData = new Array();
+	var lineData = [[],[],[]]
+
 
 	/*****************************************
 					Options
@@ -54,13 +55,18 @@ var BarClock = function(container, data, options){
 	};
 
 	var maximum = d3.max(dataSum());
-	
-	for (i=0; i<24;i++)
-	{	
-		lineData.push([0]);
-		lineData[i]= { "x": 100+ 20*i,   "y": 200-data[0][i]/maximum*o.barHeight } ;
-	}
-	
+
+
+		for (i=0; i<data[0].length; i++)
+		{	
+			lineData[0].push([0]);
+			lineData[0][i]= { "x": 455+ Math.sin(toRadians(15*[i]))*((data[0][i])						/maximum*o.barHeight+208),   "y":455 - Math.cos(toRadians(15*[i]))*((data[0][i]	)						/maximum*o.barHeight+208)} ;
+			lineData[1].push([0]);
+			lineData[1][i]= { "x": 455+ Math.sin(toRadians(15*[i]))*((data[0][i]+data[1][i])			/maximum*o.barHeight+208),   "y":455 - Math.cos(toRadians(15*[i]))*((data[0][i]+data[1][i])				/maximum*o.barHeight+208)} ;
+			lineData[2].push([0]);
+			lineData[2][i]= { "x": 455+ Math.sin(toRadians(15*[i]))*((data[0][i]+data[1][i]+data[2][i])	/maximum*o.barHeight+208),   "y":455 - Math.cos(toRadians(15*[i]))*((data[0][i]+data[1][i]+data[2][i])	/maximum*o.barHeight+208)} ;
+		}
+
 
 	stack = d3.layout.stack().offset("zero");
 
@@ -78,6 +84,10 @@ var BarClock = function(container, data, options){
 		var d = new Date(); 
 		formatTime = d3.time.format("%H:%M");
 		return formatTime(d);
+	}
+
+	function toRadians (angle) {
+  		return angle * (Math.PI / 180);
 	}
 
 	/*****************************************
@@ -136,18 +146,39 @@ var BarClock = function(container, data, options){
 			barCharts.select("#bars"+i).selectAll('rect')
 					.style('fill',function(){return o.colors[i]})
 
-			//This is the accessor function we talked about above
-var lineFunction = d3.svg.line()
+
+		//This is the accessor function to create intermediate points
+		var lineFunction = d3.svg.line()
                          .x(function(d) { return d.x; })
                         .y(function(d) { return d.y; })
                         .interpolate("cardinal-closed");
 		
-		//The line SVG Path we draw
-		var lineGraph = svg.append("path")
-                          .attr("d", lineFunction(lineData))
-                            .attr("stroke", "blue")
-                            .attr("stroke-width", 2)
-                            .attr("fill", "none");
+		//The line SVG Path
+		var lineGraph1 = svg.append("path")
+                          .attr("d", lineFunction(lineData[2]))
+                            .attr("stroke", o.colors[2])
+                            .attr("stroke-width", 3)
+                            .attr("fill", o.colors[2]);
+	
+
+		//The line SVG Path
+		var lineGraph2 = svg.append("path")
+                          .attr("d", lineFunction(lineData[1]))
+                            .attr("stroke", o.colors[1])
+                            .attr("stroke-width", 3)
+                            .attr("fill", o.colors[1]);
+
+		//The line SVG Path
+			var lineGraph3 = svg.append("path")
+	                  .attr("d", lineFunction(lineData[0]))
+	                    .attr("stroke", o.colors[0])
+	                    .attr("stroke-width", 3)
+	                    .attr("fill", o.colors[0]);
+
+
+  
+
+	
         
 		}
 		/*****************************************
