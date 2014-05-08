@@ -1,4 +1,18 @@
 var ClockView = function(container,model){
+	var menuContainer = $("<div id='menuContainer'>");
+
+	var buttonGroup = 		$("<div class='btn-group'>");
+
+	var barButton = 		$("<button title='Bar View' class='btn btn-default active'>");
+	var bezierButton = 		$("<button title='Bezier View' class='btn btn-default'>");
+
+	var barSpan = 			$("<span class='glyphicon glyphicon-th-large'>");
+	var bezierSpan = 		$("<span class='glyphicon glyphicon-th-list'>");
+
+	barButton.append(barSpan);
+	bezierButton.append(bezierSpan);
+
+	buttonGroup.append(barButton,bezierButton);
 
 	var data = [[9,8,7,6,5,4,3,2,1,0,1,2,3,4,5,6,7,8,9,8,7,6,5,4],
 				[4,7,3,5,6,5,1,1,2,3,4,5,6,7,8,9,8,7,6,5,5,4,3,4],
@@ -12,7 +26,8 @@ var ClockView = function(container,model){
 
 		}
 
-	var bezierClock = new BarClock(container,data, options);
+	var barClock = new BarClock(container,data, options);
+	var bezierClock = new BezierClock(container,data, options);
 
 	/********************************************************************************
 							Adding the icons for each category.
@@ -66,6 +81,7 @@ var ClockView = function(container,model){
 	waterContainer.append(waterIcon,waterLabel);
 	$(iconsContainer).append(waterContainer);
 	$(container).append(iconsContainer);
+	$(container).append(buttonGroup);
 
 	/********************************************************************************
 						Creating random data to test with.
@@ -76,27 +92,28 @@ var ClockView = function(container,model){
 		data = [[],[],[]];
 
 		for(i=0; i<3; i++){
-			for(j=0; j<360; j++){
+			for(j=0; j<24; j++){
 				data[i].push(Math.random()*10);
 			}
 		}
 
 		if(gasBool == false){
-			for(i=0; i<360; i++){
+			for(i=0; i<24; i++){
 				data[0][i] = 0;
 			}
 		}
 		if(elecBool == false){
-			for(i=0; i<360; i++){
+			for(i=0; i<24; i++){
 				data[1][i] = 0;
 			}
 		}
 		if(waterBool == false){
-			for(i=0; i<360; i++){
+			for(i=0; i<24; i++){
 				data[2][i] = 0;
 			}
 		}
 
+		//barClock.update(data);
 		bezierClock.update(data);
 
 		gasLabel.html("SEK "+Math.round(gasCount()));
@@ -110,6 +127,8 @@ var ClockView = function(container,model){
 	/********************************************************************************
 							 Public variables and functions
 	********************************************************************************/
+	this.barButton 			= barButton;
+	this.bezierButton 		= bezierButton;
 
 	this.gasContainer 		= gasContainer;
 	this.elecContainer 		= elecContainer;

@@ -41,4 +41,21 @@ var ClockController = function(view,model){
 		}
 		view.updateClock();
 	});
+
+	function hideAll(){
+		$("#energyClock, #energyClock2").hide();
+		$(view.barButton).removeClass('active');
+		$(view.bezierButton).removeClass('active');
+	}hideAll();
+
+	view.barButton.click(function(){
+		$(this).addClass("active");
+		$("#energyClock").show();
+	}
+
+	view.bezierButton.click(function(){
+		$(this).addClass("active");
+		$("#energyClock2").show();
+	}
+	
 }

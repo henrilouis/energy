@@ -1,4 +1,4 @@
-var BarClock = function(container, data, options){
+var BezierClock = function(container, data, options){
 
 	var date 					= new Date();
 	var currentTime 			= date.getHours();
@@ -110,42 +110,7 @@ var BarClock = function(container, data, options){
 		svg = d3.select("#energyClock").append("svg")
 			.attr("width",diameter)
 			.attr("height",diameter);
-		/*
-		// Bar charts group
-		barCharts = svg.append( 'g' )
-			.attr( 'transform' , 'translate('+( diameter/2 )+','+( diameter/2 )+')')
-			.attr( 'id','barCharts' );
 		
-		// Loop through the different sets
-		barCharts.selectAll("g")
-			.data(stack(dataMap))
-			.enter().append('g')
-				.attr('id',function(d,i){
-					return "bars"+i;
-				})
-				.selectAll('rect')
-				.data(function(d,i){return d;})
-				.enter().append('rect')
-			.attr("height",function(d,i){
-				return ( ( d.y / d3.max( dataSum() ) * o.barHeight ) );
-				
-			})
-			.attr("width", o.barWidth)
-			.attr('transform',function(d,i){
-				return 'rotate(' + scaleCalc(i) + ') translate('+ -( o.barWidth/2 ) +','+ -( 
-
-					o.centerRadius+o.centerWidth+o.gap+calcHeight(d.y+d.y0) 
-
-					) +')';
-			});
-
-		// give the bars the right colours
-		for(i=0; i<data.length; i++){
-			barCharts.select("#bars"+i).selectAll('rect')
-					.style('fill',function(){return o.colors[i]})
-		}
-		*/
-
 		/*****************************************
 				Creating the bezier lines
 		*****************************************/
@@ -248,25 +213,6 @@ var BarClock = function(container, data, options){
 			lineData[1][i]= { "x": 455+ circularSinValue*((data[0][i]+data[1][i])				/maximum*o.barHeight+208),   "y":455 - circularCosValue*((data[0][i]+data[1][i])			/maximum*o.barHeight+208)} ;
 			lineData[2][i]= { "x": 455+ circularSinValue*((data[0][i]+data[1][i]+data[2][i])	/maximum*o.barHeight+208),   "y":455 - circularCosValue*((data[0][i]+data[1][i]+data[2][i])	/maximum*o.barHeight+208)} ;
 		}
-		/*
-		barCharts.selectAll("g")
-			.data(stack(dataMap))
-				.selectAll('rect')
-				.data(function(d,i){return d;})
-				.transition()
-			.attr("height",function(d,i){
-				return ( ( d.y / d3.max( dataSum() ) * o.barHeight ) );
-			})
-			.attr("width", o.barWidth)
-			.attr('transform',function(d,i){
-				return 'rotate(' + scaleCalc(i) + ') translate('+ -( o.barWidth/2 ) +','+ -( 
-
-					o.centerRadius+o.centerWidth+o.gap+calcHeight(d.y+d.y0) 
-
-					) +')';
-			});
-
-		*/
 		
 		/*****************************************
 		Update the bezier lines using transitions
