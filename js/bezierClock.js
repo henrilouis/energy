@@ -55,18 +55,16 @@ var BarClock = function(container, data, options){
 	};
 
 	var maximum = d3.max(dataSum());
+	var circularAmount = 360/data[0].length;
 
-
-		for (i=0; i<data[0].length; i++)
-		{	
-			lineData[0].push([0]);
-			lineData[0][i]= { "x": 455+ Math.sin(toRadians(15*[i]))*((data[0][i])						/maximum*o.barHeight+208),   "y":455 - Math.cos(toRadians(15*[i]))*((data[0][i]	)						/maximum*o.barHeight+208)} ;
-			lineData[1].push([0]);
-			lineData[1][i]= { "x": 455+ Math.sin(toRadians(15*[i]))*((data[0][i]+data[1][i])			/maximum*o.barHeight+208),   "y":455 - Math.cos(toRadians(15*[i]))*((data[0][i]+data[1][i])				/maximum*o.barHeight+208)} ;
-			lineData[2].push([0]);
-			lineData[2][i]= { "x": 455+ Math.sin(toRadians(15*[i]))*((data[0][i]+data[1][i]+data[2][i])	/maximum*o.barHeight+208),   "y":455 - Math.cos(toRadians(15*[i]))*((data[0][i]+data[1][i]+data[2][i])	/maximum*o.barHeight+208)} ;
-		}
-
+	for (i=0; i<data[0].length; i++)
+	{	
+		var circularSinValue = Math.sin(toRadians(circularAmount*[i]));
+		var circularCosValue = Math.cos(toRadians(circularAmount*[i]))
+		lineData[0][i]= { "x": 455+ circularSinValue*((data[0][i])							/maximum*o.barHeight+208),   "y":455 - circularCosValue*((data[0][i])						/maximum*o.barHeight+208)} ;
+		lineData[1][i]= { "x": 455+ circularSinValue*((data[0][i]+data[1][i])				/maximum*o.barHeight+208),   "y":455 - circularCosValue*((data[0][i]+data[1][i])			/maximum*o.barHeight+208)} ;
+		lineData[2][i]= { "x": 455+ circularSinValue*((data[0][i]+data[1][i]+data[2][i])	/maximum*o.barHeight+208),   "y":455 - circularCosValue*((data[0][i]+data[1][i]+data[2][i])	/maximum*o.barHeight+208)} ;
+	}
 
 	stack = d3.layout.stack().offset("zero");
 
@@ -104,7 +102,7 @@ var BarClock = function(container, data, options){
 		/*****************************************
 				Creating the bar-charts
 		*****************************************/
-
+		
 		// The mapping function that creates the normally data type for stacked barcharts
 		dataMap = data.map(function(d) { return d.map(function(p, i) { return {x:i, y:p, y0:0}; }); });
 
@@ -112,7 +110,7 @@ var BarClock = function(container, data, options){
 		svg = d3.select("#energyClock").append("svg")
 			.attr("width",diameter)
 			.attr("height",diameter);
-
+		/*
 		// Bar charts group
 		barCharts = svg.append( 'g' )
 			.attr( 'transform' , 'translate('+( diameter/2 )+','+( diameter/2 )+')')
@@ -145,7 +143,12 @@ var BarClock = function(container, data, options){
 		for(i=0; i<data.length; i++){
 			barCharts.select("#bars"+i).selectAll('rect')
 					.style('fill',function(){return o.colors[i]})
+		}
+		*/
 
+		/*****************************************
+				Creating the bezier lines
+		*****************************************/
 
 		//This is the accessor function to create intermediate points
 		var lineFunction = d3.svg.line()
@@ -153,34 +156,28 @@ var BarClock = function(container, data, options){
                         .y(function(d) { return d.y; })
                         .interpolate("cardinal-closed");
 		
-		//The line SVG Path
-		var lineGraph1 = svg.append("path")
+		//The first line SVG Path
+		lineGraph1 = svg.append("path")
                           .attr("d", lineFunction(lineData[2]))
                             .attr("stroke", o.colors[2])
                             .attr("stroke-width", 3)
                             .attr("fill", o.colors[2]);
 	
 
-		//The line SVG Path
-		var lineGraph2 = svg.append("path")
+		//The second line SVG Path
+		lineGraph2 = svg.append("path")
                           .attr("d", lineFunction(lineData[1]))
                             .attr("stroke", o.colors[1])
                             .attr("stroke-width", 3)
                             .attr("fill", o.colors[1]);
 
-		//The line SVG Path
-			var lineGraph3 = svg.append("path")
+		//The third line SVG Path
+		lineGraph3 = svg.append("path")
 	                  .attr("d", lineFunction(lineData[0]))
 	                    .attr("stroke", o.colors[0])
 	                    .attr("stroke-width", 3)
 	                    .attr("fill", o.colors[0]);
 
-
-  
-
-	
-        
-		}
 		/*****************************************
 				Creating the clock center
 		*****************************************/
@@ -239,7 +236,19 @@ var BarClock = function(container, data, options){
 		data = value;
 
 		dataMap = data.map(function(d) { return d.map(function(p, i) { return {x:i, y:p, y0:0}; }); });
-		
+		lineData = [[],[],[]]
+		maximum = d3.max(dataSum());
+		circularAmount = 360/data[0].length;
+
+		for (i=0; i<data[0].length; i++)
+		{	
+			var circularSinValue = Math.sin(toRadians(circularAmount*[i]));
+			var circularCosValue = Math.cos(toRadians(circularAmount*[i]))
+			lineData[0][i]= { "x": 455+ circularSinValue*((data[0][i])							/maximum*o.barHeight+208),   "y":455 - circularCosValue*((data[0][i])						/maximum*o.barHeight+208)} ;
+			lineData[1][i]= { "x": 455+ circularSinValue*((data[0][i]+data[1][i])				/maximum*o.barHeight+208),   "y":455 - circularCosValue*((data[0][i]+data[1][i])			/maximum*o.barHeight+208)} ;
+			lineData[2][i]= { "x": 455+ circularSinValue*((data[0][i]+data[1][i]+data[2][i])	/maximum*o.barHeight+208),   "y":455 - circularCosValue*((data[0][i]+data[1][i]+data[2][i])	/maximum*o.barHeight+208)} ;
+		}
+		/*
 		barCharts.selectAll("g")
 			.data(stack(dataMap))
 				.selectAll('rect')
@@ -256,6 +265,26 @@ var BarClock = function(container, data, options){
 
 					) +')';
 			});
+
+		*/
+		
+		/*****************************************
+		Update the bezier lines using transitions
+		*****************************************/
+		
+		//Accessor function to create intermediate points
+		var lineFunction = d3.svg.line()
+                         .x(function(d) { return d.x; })
+                        .y(function(d) { return d.y; })
+                        .interpolate("cardinal-closed");
+       	lineGraph1.transition()
+			.attr("d", lineFunction(lineData[2]))
+		
+		lineGraph2.transition()
+			.attr("d", lineFunction(lineData[1]))
+		
+		lineGraph3.transition()
+			.attr("d", lineFunction(lineData[0]))
 	}
 
 	/*****************************************

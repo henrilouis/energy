@@ -76,23 +76,23 @@ var ClockView = function(container,model){
 		data = [[],[],[]];
 
 		for(i=0; i<3; i++){
-			for(j=0; j<24; j++){
+			for(j=0; j<360; j++){
 				data[i].push(Math.random()*10);
 			}
 		}
 
 		if(gasBool == false){
-			for(i=0; i<24; i++){
+			for(i=0; i<360; i++){
 				data[0][i] = 0;
 			}
 		}
 		if(elecBool == false){
-			for(i=0; i<24; i++){
+			for(i=0; i<360; i++){
 				data[1][i] = 0;
 			}
 		}
 		if(waterBool == false){
-			for(i=0; i<24; i++){
+			for(i=0; i<360; i++){
 				data[2][i] = 0;
 			}
 		}
@@ -105,7 +105,7 @@ var ClockView = function(container,model){
 
 	}
 
-	setInterval(updateClock,3000000);
+	setInterval(updateClock,3000);
 
 	/********************************************************************************
 							 Public variables and functions
