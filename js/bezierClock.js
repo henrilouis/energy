@@ -115,36 +115,19 @@ var BezierClock = function(container, data, options){
                         .y(function(d) { return d.y; })
                         .interpolate("linear");
 
-        //clipping mask path for current data              
-        for (i=0; i<hournumber+1;i++)
-        {
-       		var circularSinValue = Math.sin(toRadians(circularAmount*[i]));
-			var circularCosValue = Math.cos(toRadians(circularAmount*[i]))	
-         	clipMask[i] ={ "x": diameter/2 + circularSinValue*500,   "y":diameter/2 - circularCosValue*500};             
-        }
-        clipMask[clipMask.length] ={ "x": 455,"y":455};  
-
-        //clipping mask path for previous data
-        for (j=hournumber; j<24+1;j++)
-        {
-       		circularSinValue = Math.sin(toRadians(circularAmount*[j]));
-			circularCosValue = Math.cos(toRadians(circularAmount*[j]))	
-         	clipMaskInverted[j-hournumber] ={ "x": diameter/2+ circularSinValue*500,   "y":diameter/2 - circularCosValue*500};             
-        }
-        clipMaskInverted[clipMaskInverted.length] ={ "x": 455,"y":455};  
-
-        svg.append("svg:clipPath")
+        // create clipping masks for data
+        clipper = svg.append("svg:clipPath")
 		    .attr("id", "clipper")
 		    .append("svg:path")
 		  	.attr("d", lineFunctionLinear(clipMask));
 
-		svg.append("svg:clipPath")
+		invertedclipper = svg.append("svg:clipPath")
 		    .attr("id", "invertedclipper")
 		    .append("svg:path")
 		  	.attr("d", lineFunctionLinear(clipMaskInverted));
+
 		
 		//kan effiecienter maar kreeg het niet lekker werkend met for loop
-
 		//previous data:              
 	    //The first line SVG Path
 	    
@@ -274,6 +257,18 @@ var BezierClock = function(container, data, options){
                         .x(function(d) { return d.x; })
                         .y(function(d) { return d.y; })
                         .interpolate("cardinal-closed");
+
+        var lineFunctionLinear = d3.svg.line()
+                         .x(function(d) { return d.x; })
+                        .y(function(d) { return d.y; })
+                        .interpolate("linear");
+
+        // update clipping masks for data
+        clipper.transition()
+		  	.attr("d", lineFunctionLinear(clipMask));
+
+		invertedclipper.transition()
+		  	.attr("d", lineFunctionLinear(clipMaskInverted));
   	
         //kan effiecienter maar kreeg het niet lekker werkend
 		oldlineGraph3.transition()
@@ -300,6 +295,25 @@ var BezierClock = function(container, data, options){
 		circularAmount = 360/data[0][0].length;
 		hournumber = parseInt(getTime().slice(0, -3));
 			
+			//clipping mask path for current data              
+	        for (i=0; i<hournumber+1;i++)
+	        {
+	       		var circularSinValue = Math.sin(toRadians(circularAmount*[i]));
+				var circularCosValue = Math.cos(toRadians(circularAmount*[i]))	
+	         	clipMask[i] ={ "x": diameter/2 + circularSinValue*500,   "y":diameter/2 - circularCosValue*500};             
+	        }
+	        clipMask[clipMask.length] ={ "x": 455,"y":455};  
+
+	        //clipping mask path for previous data
+	        for (j=hournumber; j<24+1;j++)
+	        {
+	       		circularSinValue = Math.sin(toRadians(circularAmount*[j]));
+				circularCosValue = Math.cos(toRadians(circularAmount*[j]))	
+	         	clipMaskInverted[j-hournumber] ={ "x": diameter/2+ circularSinValue*500,   "y":diameter/2 - circularCosValue*500};             
+	        }
+	        clipMaskInverted[clipMaskInverted.length] ={ "x": 455,"y":455}; 
+
+
 			//kan effiecienter maar dan is het misschien een idee om in het model al optelsommetjes te maken
 			for (i=0; i<data[0][0].length; i++)
 			{	
