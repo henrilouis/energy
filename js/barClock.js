@@ -42,10 +42,10 @@ var BarClock = function(container, data, options){
 
 	var dataSum = function(){
 		var d = new Array;
-		for(i=0; i<data[0].length; i++){
+		for(i=0; i<data[0][0].length; i++){
 			d.push(0);
-			for(j=0; j<data.length; j++){
-				d[i] += data[j][i];
+			for(j=0; j<data[0].length; j++){
+				d[i] += data[0][j][i];
 			}
 		}
 		return d;
@@ -56,8 +56,8 @@ var BarClock = function(container, data, options){
 	var diameter = (o.centerRadius*2) + (o.centerWidth*2) + (o.gap*2) + (o.barHeight*2);
 
 	var scaleCalc = d3.scale.linear()
-		.range( [ 0,360-( 360/data[0].length ) ] )
-		.domain([0,data[0].length-1]);
+		.range( [ 0,360-( 360/data[0][0].length ) ] )
+		.domain([0,data[0][0].length-1]);
 
 	function calcHeight(number){
 		return number/d3.max(dataSum())*o.barHeight;
@@ -85,7 +85,7 @@ var BarClock = function(container, data, options){
 		*****************************************/
 
 		// The mapping function that creates the normally data type for stacked barcharts
-		dataMap = data.map(function(d) { return d.map(function(p, i) { return {x:i, y:p, y0:0}; }); });
+		dataMap = data[0].map(function(d) { return d.map(function(p, i) { return {x:i, y:p, y0:0}; }); });
 
 		svg = d3.select("#barEnergyClock").append("svg")
 			.attr("width",diameter)
@@ -119,7 +119,7 @@ var BarClock = function(container, data, options){
 			});
 
 		// give the bars the right colours
-		for(i=0; i<data.length; i++){
+		for(i=0; i<data[0].length; i++){
 			barCharts.select("#bars"+i).selectAll('rect')
 					.style('fill',function(){return o.colors[i]})
 		}
@@ -179,7 +179,7 @@ var BarClock = function(container, data, options){
 	function update(value){
 		data = value;
 
-		dataMap = data.map(function(d) { return d.map(function(p, i) { return {x:i, y:p, y0:0}; }); });
+		dataMap = data[0].map(function(d) { return d.map(function(p, i) { return {x:i, y:p, y0:0}; }); });
 		
 		barCharts.selectAll("g")
 			.data(stack(dataMap))

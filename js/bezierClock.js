@@ -4,8 +4,10 @@ var BezierClock = function(container, data, options){
 	var currentTime 			= date.getHours();
 	var svg, barCharts, centerPiece, backgroundCircle, handArc, arcGradient, clockHand, clockTime, 
 		gasIcon, electricityIcon, waterIcon, gasMeter, electricityMeter, waterMeter;
-	var lineData = [[],[],[],[]]
-
+	var lineData = [[],[],[],[]];
+	var oldlineData = [[],[],[],[]];
+	var clipMask =[];
+	var clipMaskInverted =[];
 
 	/*****************************************
 					Options
@@ -45,35 +47,26 @@ var BezierClock = function(container, data, options){
 
 	var dataSum = function(length){
 		var d = new Array;
-		for(i=0; i<data[0].length; i++){
+		for(i=0; i<data[0][0].length; i++){
 			d.push(0);
-			for(j=0; j<data.length; j++){
-				d[i] += data[j][i];
+			for(j=0; j<data[0].length; j++){
+				d[i] += data[0][j][i];
 			}
 		}
 		return d;
 	};
 
 	var maximum = d3.max(dataSum());
-	var circularAmount = 360/data[0].length;
-
-	for (i=0; i<data[0].length; i++)
-	{	
-		var circularSinValue = Math.sin(toRadians(circularAmount*[i]));
-		var circularCosValue = Math.cos(toRadians(circularAmount*[i]))
-		lineData[0][i]= { "x": 455+ circularSinValue*((data[0][i])							/maximum*o.barHeight+208),   "y":455 - circularCosValue*((data[0][i])						/maximum*o.barHeight+208)} ;
-		lineData[1][i]= { "x": 455+ circularSinValue*((data[0][i]+data[1][i])				/maximum*o.barHeight+208),   "y":455 - circularCosValue*((data[0][i]+data[1][i])			/maximum*o.barHeight+208)} ;
-		lineData[2][i]= { "x": 455+ circularSinValue*((data[0][i]+data[1][i]+data[2][i])	/maximum*o.barHeight+208),   "y":455 - circularCosValue*((data[0][i]+data[1][i]+data[2][i])	/maximum*o.barHeight+208)} ;
-		lineData[3][i]= { "x": 455+ circularSinValue*((data[0][i]+data[1][i]+data[2][i]+((Math.random()*8)-4))	/maximum*o.barHeight+208),   "y":455 - circularCosValue*((data[0][i]+data[1][i]+data[2][i]+((Math.random()*8)-4))	/maximum*o.barHeight+208)} ;
-	}
-
+	var circularAmount = 360/data[0][0].length;
+	var hournumber = parseInt(getTime().slice(0, -3));
+	
 	stack = d3.layout.stack().offset("zero");
 
 	var diameter = (o.centerRadius*2) + (o.centerWidth*2) + (o.gap*2) + (o.barHeight*2);
 
 	var scaleCalc = d3.scale.linear()
-		.range( [ 0,360-( 360/data[0].length ) ] )
-		.domain([0,data[0].length-1]);
+		.range( [ 0,360-( 360/data[0][0].length ) ] )
+		.domain([0,data[0][0].length-1]);
 
 	function calcHeight(number){
 		return number/d3.max(dataSum())*o.barHeight;
@@ -108,34 +101,74 @@ var BezierClock = function(container, data, options){
 		/*****************************************
 				Creating the bezier lines
 		*****************************************/
-
+		//calcute x, y coordinates
+		createLineData(data);
+		
 		//This is the accessor function to create intermediate points
 		var lineFunction = d3.svg.line()
                          .x(function(d) { return d.x; })
                         .y(function(d) { return d.y; })
                         .interpolate("cardinal-closed");
+        
+        var lineFunctionLinear = d3.svg.line()
+                         .x(function(d) { return d.x; })
+                        .y(function(d) { return d.y; })
+                        .interpolate("linear");
+
+        //clipping mask path for current data              
+        for (i=0; i<hournumber+1;i++)
+        {
+       		var circularSinValue = Math.sin(toRadians(circularAmount*[i]));
+			var circularCosValue = Math.cos(toRadians(circularAmount*[i]))	
+         	clipMask[i] ={ "x": diameter/2 + circularSinValue*500,   "y":diameter/2 - circularCosValue*500};             
+        }
+        clipMask[clipMask.length] ={ "x": 455,"y":455};  
+
+        //clipping mask path for previous data
+        for (j=hournumber; j<24+1;j++)
+        {
+       		circularSinValue = Math.sin(toRadians(circularAmount*[j]));
+			circularCosValue = Math.cos(toRadians(circularAmount*[j]))	
+         	clipMaskInverted[j-hournumber] ={ "x": diameter/2+ circularSinValue*500,   "y":diameter/2 - circularCosValue*500};             
+        }
+        clipMaskInverted[clipMaskInverted.length] ={ "x": 455,"y":455};  
+
+        svg.append("svg:clipPath")
+		    .attr("id", "clipper")
+		    .append("svg:path")
+		  	.attr("d", lineFunctionLinear(clipMask));
+
+		svg.append("svg:clipPath")
+		    .attr("id", "invertedclipper")
+		    .append("svg:path")
+		  	.attr("d", lineFunctionLinear(clipMaskInverted));
 		
+		//previous data:              
+	    //The first line SVG Path
+	    for (i=2;i>-1;i--)
+	    {
+	    	oldlineGraph = svg.append("path")
+	    	  .attr("id", "oldlineGraph"+[i])
+              .attr("d", lineFunction(oldlineData[i]))
+              .attr("stroke", o.colors[i])
+              .attr("stroke-width", 3)
+              .attr("clip-path", "url(#invertedclipper)")
+              .style("opacity", 0.2)
+              .attr("fill", o.colors[i]);
+		}
+  
+		// current data:
 		//The first line SVG Path
-		lineGraph1 = svg.append("path")
-                          .attr("d", lineFunction(lineData[2]))
-                            .attr("stroke", o.colors[2])
-                            .attr("stroke-width", 3)
-                            .attr("fill", o.colors[2]);
-	
-
-		//The second line SVG Path
-		lineGraph2 = svg.append("path")
-                          .attr("d", lineFunction(lineData[1]))
-                            .attr("stroke", o.colors[1])
-                            .attr("stroke-width", 3)
-                            .attr("fill", o.colors[1]);
-
-		//The third line SVG Path
-		lineGraph3 = svg.append("path")
-	                  .attr("d", lineFunction(lineData[0]))
-	                    .attr("stroke", o.colors[0])
-	                    .attr("stroke-width", 3)
-	                    .attr("fill", o.colors[0]);
+		for (i=2;i>-1;i--)
+	    {
+			lineGraph = svg.append("path")
+				.attr("id", "lineGraph"+[i]	)
+	          	.attr("d", lineFunction(lineData[i]))
+	            .attr("stroke", o.colors[i])
+	            .attr("stroke-width", 3)
+	            .attr("clip-path", "url(#clipper)")
+	            .attr("fill", o.colors[i]);
+        }         
 
 	    //The average data line SVG Path
 		lineGraph4 = svg.append("path")
@@ -188,9 +221,6 @@ var BezierClock = function(container, data, options){
 	    	.attr("text-anchor", "middle")
 	    	.style("font-size",o.timeFontSize+"px")
 	    	.style("fill",o.fontColor);
-
-	   	
-
 	}
 	drawClock();
 
@@ -198,44 +228,71 @@ var BezierClock = function(container, data, options){
 		Update the clock using transitions
 	*****************************************/
 
-	function update(value){
-		data = value;
-
-		dataMap = data.map(function(d) { return d.map(function(p, i) { return {x:i, y:p, y0:0}; }); });
-		lineData = [[],[],[],[]]
-		maximum = d3.max(dataSum());
-		circularAmount = 360/data[0].length;
-
-		for (i=0; i<data[0].length; i++)
-		{	
-			var circularSinValue = Math.sin(toRadians(circularAmount*[i]));
-			var circularCosValue = Math.cos(toRadians(circularAmount*[i]))
-			lineData[0][i]= { "x": 455+ circularSinValue*((data[0][i])							/maximum*o.barHeight+208),   "y":455 - circularCosValue*((data[0][i])						/maximum*o.barHeight+208)} ;
-			lineData[1][i]= { "x": 455+ circularSinValue*((data[0][i]+data[1][i])				/maximum*o.barHeight+208),   "y":455 - circularCosValue*((data[0][i]+data[1][i])			/maximum*o.barHeight+208)} ;
-			lineData[2][i]= { "x": 455+ circularSinValue*((data[0][i]+data[1][i]+data[2][i])	/maximum*o.barHeight+208),   "y":455 - circularCosValue*((data[0][i]+data[1][i]+data[2][i])	/maximum*o.barHeight+208)} ;
-			lineData[3][i]= { "x": 455+ circularSinValue*((data[0][i]+data[1][i]+data[2][i]+((Math.random()*8)-4))	/maximum*o.barHeight+208),   "y":455 - circularCosValue*((data[0][i]+data[1][i]+data[2][i]+((Math.random()*8)-4))	/maximum*o.barHeight+208)} ;
-		}
-		
+	function update(data){
+				
 		/*****************************************
 		Update the bezier lines using transitions
 		*****************************************/
+		//calcute x, y coordinates
+		createLineData(data);
 		
 		//Accessor function to create intermediate points
 		var lineFunction = d3.svg.line()
-                         .x(function(d) { return d.x; })
+                        .x(function(d) { return d.x; })
                         .y(function(d) { return d.y; })
                         .interpolate("cardinal-closed");
-       	lineGraph1.transition()
-			.attr("d", lineFunction(lineData[2]))
+  	
+       	//lineGraph.transition()
+		//	.attr("d", lineFunction(lineData[0]));
+
+		oldlineGraph.select("#oldlineGraph").selectAll('path')
+		.transition()
+			.attr("d", lineFunction(lineData[2]));
 		
-		lineGraph2.transition()
-			.attr("d", lineFunction(lineData[1]))
+		lineGraph.select("g")
+			.transition()
+			.attr("d", lineFunction(lineData[2]));
 		
-		lineGraph3.transition()
-			.attr("d", lineFunction(lineData[0]))
+		d3.select("linegraph3")
+			.transition()
+			.attr("d", lineFunction(lineData[0]));
+		
+		d3.select("#oldlinegraph1")
+			.transition()
+			.attr("d", lineFunction(oldlineData[2]));
+		d3.select("#oldlinegraph2")
+			.transition()
+			.attr("d", lineFunction(oldlineData[1]));
+		d3.select("#oldlinegraph3")
+			.transition()
+			.attr("d", lineFunction(oldlineData[0]));
 
 		lineGraph4.transition()
 			.attr("d", lineFunction(lineData[3]))
+	}
+
+	function createLineData(data){
+		lineData = [[],[],[],[]];
+		oldlineData = [[],[],[],[]];
+		circularAmount = 360/data[0][0].length;
+		hournumber = parseInt(getTime().slice(0, -3));
+			
+			for (i=0; i<data[0][0].length; i++)
+			{	
+				var circularSinValue = Math.sin(toRadians(circularAmount*[i]));
+				var circularCosValue = Math.cos(toRadians(circularAmount*[i]))
+				lineData[0][i]= { "x": diameter/2+ circularSinValue*((data[0][0][i])								/maximum*o.barHeight+208),   "y":diameter/2 - circularCosValue*((data[0][0][i])								/maximum*o.barHeight+208)} ;
+				lineData[1][i]= { "x": diameter/2+ circularSinValue*((data[0][0][i]+data[0][1][i])					/maximum*o.barHeight+208),   "y":diameter/2 - circularCosValue*((data[0][0][i]+data[0][1][i])				/maximum*o.barHeight+208)} ;
+				lineData[2][i]= { "x": diameter/2+ circularSinValue*((data[0][0][i]+data[0][1][i]+data[0][2][i])	/maximum*o.barHeight+208),   "y":diameter/2 - circularCosValue*((data[0][0][i]+data[0][1][i]+data[0][2][i])	/maximum*o.barHeight+208)} ;
+
+				lineData[3][i]= { "x": diameter/2+ circularSinValue*((data[2][0][i]+data[2][1][i]+data[2][2][i])	/maximum*o.barHeight+208),   "y":diameter/2 - circularCosValue*((data[2][0][i]+data[2][1][i]+data[2][2][i])	/maximum*o.barHeight+208)} ;
+				
+				oldlineData[0][i]= { "x": diameter/2+ circularSinValue*((data[1][0][i])								/maximum*o.barHeight+208),   "y":diameter/2 - circularCosValue*((data[1][0][i])								/maximum*o.barHeight+208)} ;
+				oldlineData[1][i]= { "x": diameter/2+ circularSinValue*((data[1][0][i]+data[0][1][i])				/maximum*o.barHeight+208),   "y":diameter/2 - circularCosValue*((data[1][0][i]+data[0][1][i])				/maximum*o.barHeight+208)} ;
+				oldlineData[2][i]= { "x": diameter/2+ circularSinValue*((data[1][0][i]+data[0][1][i]+data[0][2][i])	/maximum*o.barHeight+208),   "y":diameter/2 - circularCosValue*((data[1][0][i]+data[0][1][i]+data[0][2][i])	/maximum*o.barHeight+208)} ;
+			}
+			return lineData;
+			return oldlineData;
 	}
 
 	/*****************************************
