@@ -1,4 +1,18 @@
 var ClockView = function(container,model){
+	var menuContainer = $("<div id='menuContainer'>");
+
+	var buttonGroup = 		$("<div class='btn-group'>");
+
+	var barButton = 		$("<button title='Bar View' class='btn btn-default active'>");
+	var bezierButton = 		$("<button title='Bezier View' class='btn btn-default'>");
+
+	var barSpan = 			$("<span class='glyphicon glyphicon-th-large'>");
+	var bezierSpan = 		$("<span class='glyphicon glyphicon-th-list'>");
+
+	barButton.append(barSpan);
+	bezierButton.append(bezierSpan);
+
+	buttonGroup.append(barButton,bezierButton);
 
 	var data = [[9,8,7,6,5,4,3,2,1,0,1,2,3,4,5,6,7,8,9,8,7,6,5,4],
 				[4,7,3,5,6,5,1,1,2,3,4,5,6,7,8,9,8,7,6,5,5,4,3,4],
@@ -11,16 +25,19 @@ var ClockView = function(container,model){
 			colors					: ["#E25942","#F6CB51","#13A89E"]
 
 		}
-
+	
 	var barClock = new BarClock(container,data, options);
+	var bezierClock = new BezierClock(container,data, options);
 
 	/********************************************************************************
 							Adding the icons for each category.
 	********************************************************************************/
 	
 	var iconsContainer = $("<div id='iconsContainer'>");
-		iconsContainer.css('margin-left',($('#energyClock svg').width()/2) -112);
-		iconsContainer.css('margin-top',(-$('#energyClock svg').height()/2));
+		iconsContainer.css('margin-left',($('#barEnergyClock svg').width()/2) -112);
+		iconsContainer.css('margin-top',(-$('#barEnergyClock svg').height()/2));
+		iconsContainer.css('margin-left',($('#bezierEnergyClock svg').width()/2) -112);
+		iconsContainer.css('margin-top',(-$('#bezierEnergyClock svg').height()/2));
 
 	var gasContainer = $("<div class='iconContainer'>");
 	var gasIcon = $("<svg width='40' height='54'><path fill='"+options.colors[0]+"' d='M36.637,33.405C34.373,24.244,9.214,0,9.214,0S3.727,24.244,1.461,33.405c-2.106,8.522,2.276,16.261,8.345,20.356c-1.802-5.667-3.188-12.581-0.592-15.647c0,0,3.467-4.235,3.899-9.701c0,0,5.807,3.635,5.937,11.435c0,0,4.204-8.883,0-15.382c0,0,16.498,8.349,11.535,29.497C35.021,49.602,38.385,40.473,36.637,33.405z'/>")
@@ -67,6 +84,7 @@ var ClockView = function(container,model){
 	waterContainer.append(waterIcon,waterLabel);
 	$(iconsContainer).append(waterContainer);
 	$(container).append(iconsContainer);
+	$(container).append(buttonGroup);
 
 	/********************************************************************************
 						Creating random data to test with.
@@ -99,6 +117,7 @@ var ClockView = function(container,model){
 		}
 
 		barClock.update(data);
+		bezierClock.update(data);
 
 		gasLabel.html("SEK "+Math.round(gasCount()));
 		elecLabel.html("SEK "+Math.round(elecCount()));
@@ -111,6 +130,8 @@ var ClockView = function(container,model){
 	/********************************************************************************
 							 Public variables and functions
 	********************************************************************************/
+	this.barButton 			= barButton;
+	this.bezierButton 		= bezierButton;
 
 	this.gasContainer 		= gasContainer;
 	this.elecContainer 		= elecContainer;

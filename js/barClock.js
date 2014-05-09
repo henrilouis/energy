@@ -74,7 +74,7 @@ var BarClock = function(container, data, options){
 	*****************************************/
 
 	var energyClock = d3.select(container).append("div")
-		.attr('id','energyClock')
+		.attr('id','barEnergyClock')
 		.style('width',diameter)
 		.style('background',o.backgroundColor);
 
@@ -87,7 +87,7 @@ var BarClock = function(container, data, options){
 		// The mapping function that creates the normally data type for stacked barcharts
 		dataMap = data.map(function(d) { return d.map(function(p, i) { return {x:i, y:p, y0:0}; }); });
 
-		svg = d3.select("#energyClock").append("svg")
+		svg = d3.select("#barEnergyClock").append("svg")
 			.attr("width",diameter)
 			.attr("height",diameter);
 
@@ -169,7 +169,6 @@ var BarClock = function(container, data, options){
 	    	.attr("text-anchor", "middle")
 	    	.style("font-size",o.timeFontSize+"px")
 	    	.style("fill",o.fontColor);
-
 	}
 	drawClock();
 

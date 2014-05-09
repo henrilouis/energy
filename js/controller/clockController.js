@@ -41,4 +41,30 @@ var ClockController = function(view,model){
 		}
 		view.updateClock();
 	});
+
+	function hideAll(){
+		$("#barEnergyClock, #bezierEnergyClock").hide();
+		$(view.barButton).removeClass('active');
+		$(view.bezierButton).removeClass('active');
+	}
+	
+
+	view.barButton.click(function(){
+		hideAll();
+		$(this).addClass("active");
+		$("#barEnergyClock").show();
+		$("#bezierEnergyClock").hide();
+	});
+
+	view.bezierButton.click(function(){
+		hideAll();
+		$(this).addClass("active");
+		$("#barEnergyClock").hide();
+		$("#bezierEnergyClock").show();
+	});
+
+	hideAll();
+	$("#barEnergyClock").show();
+	$(view.barButton).addClass("active");
+	
 }
