@@ -4,7 +4,7 @@ var BezierClock = function(container, data, options){
 	var currentTime 			= date.getHours();
 	var svg, barCharts, centerPiece, backgroundCircle, handArc, arcGradient, clockHand, clockTime, 
 		gasIcon, electricityIcon, waterIcon, gasMeter, electricityMeter, waterMeter;
-	var lineData = [[],[],[]]
+	var lineData = [[],[],[],[]]
 
 
 	/*****************************************
@@ -64,8 +64,9 @@ var BezierClock = function(container, data, options){
 		lineData[0][i]= { "x": 455+ circularSinValue*((data[0][i])							/maximum*o.barHeight+208),   "y":455 - circularCosValue*((data[0][i])						/maximum*o.barHeight+208)} ;
 		lineData[1][i]= { "x": 455+ circularSinValue*((data[0][i]+data[1][i])				/maximum*o.barHeight+208),   "y":455 - circularCosValue*((data[0][i]+data[1][i])			/maximum*o.barHeight+208)} ;
 		lineData[2][i]= { "x": 455+ circularSinValue*((data[0][i]+data[1][i]+data[2][i])	/maximum*o.barHeight+208),   "y":455 - circularCosValue*((data[0][i]+data[1][i]+data[2][i])	/maximum*o.barHeight+208)} ;
+		lineData[3][i]= { "x": 455+ circularSinValue*((data[0][i]+data[1][i]+data[2][i]+((Math.random()*8)-4))	/maximum*o.barHeight+208),   "y":455 - circularCosValue*((data[0][i]+data[1][i]+data[2][i]+((Math.random()*8)-4))	/maximum*o.barHeight+208)} ;
 	}
-
+	Math.floor(Math.random()*199) - 99
 	stack = d3.layout.stack().offset("zero");
 
 	var diameter = (o.centerRadius*2) + (o.centerWidth*2) + (o.gap*2) + (o.barHeight*2);
@@ -143,6 +144,13 @@ var BezierClock = function(container, data, options){
 	                    .attr("stroke-width", 3)
 	                    .attr("fill", o.colors[0]);
 
+	    //The average data line SVG Path
+		lineGraph4 = svg.append("path")
+	                  .attr("d", lineFunction(lineData[3]))
+	                    .attr("stroke", "grey")
+	                    .attr("stroke-width", 3)
+	                    .attr("fill", "none");
+
 		/*****************************************
 				Creating the clock center
 		*****************************************/
@@ -201,7 +209,7 @@ var BezierClock = function(container, data, options){
 		data = value;
 
 		dataMap = data.map(function(d) { return d.map(function(p, i) { return {x:i, y:p, y0:0}; }); });
-		lineData = [[],[],[]]
+		lineData = [[],[],[],[]]
 		maximum = d3.max(dataSum());
 		circularAmount = 360/data[0].length;
 
@@ -212,6 +220,7 @@ var BezierClock = function(container, data, options){
 			lineData[0][i]= { "x": 455+ circularSinValue*((data[0][i])							/maximum*o.barHeight+208),   "y":455 - circularCosValue*((data[0][i])						/maximum*o.barHeight+208)} ;
 			lineData[1][i]= { "x": 455+ circularSinValue*((data[0][i]+data[1][i])				/maximum*o.barHeight+208),   "y":455 - circularCosValue*((data[0][i]+data[1][i])			/maximum*o.barHeight+208)} ;
 			lineData[2][i]= { "x": 455+ circularSinValue*((data[0][i]+data[1][i]+data[2][i])	/maximum*o.barHeight+208),   "y":455 - circularCosValue*((data[0][i]+data[1][i]+data[2][i])	/maximum*o.barHeight+208)} ;
+			lineData[3][i]= { "x": 455+ circularSinValue*((data[0][i]+data[1][i]+data[2][i]+((Math.random()*8)-4))	/maximum*o.barHeight+208),   "y":455 - circularCosValue*((data[0][i]+data[1][i]+data[2][i]+((Math.random()*8)-4))	/maximum*o.barHeight+208)} ;
 		}
 		
 		/*****************************************
@@ -231,6 +240,9 @@ var BezierClock = function(container, data, options){
 		
 		lineGraph3.transition()
 			.attr("d", lineFunction(lineData[0]))
+
+		lineGraph4.transition()
+			.attr("d", lineFunction(lineData[3]))
 	}
 
 	/*****************************************
