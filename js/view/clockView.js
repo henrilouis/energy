@@ -35,6 +35,8 @@ var ClockView = function(container,model){
 	var iconsContainer = $("<div id='iconsContainer'>");
 		iconsContainer.css('margin-left',($('#energyClock svg').width()/2) -112);
 		iconsContainer.css('margin-top',(-$('#energyClock svg').height()/2));
+		iconsContainer.css('margin-left',($('#energyClock2 svg').width()/2) -112);
+		iconsContainer.css('margin-top',(-$('#energyClock2 svg').height()/2));
 
 	var gasContainer = $("<div class='iconContainer'>");
 	var gasIcon = $("<svg width='40' height='54'><path fill='"+options.colors[0]+"' d='M36.637,33.405C34.373,24.244,9.214,0,9.214,0S3.727,24.244,1.461,33.405c-2.106,8.522,2.276,16.261,8.345,20.356c-1.802-5.667-3.188-12.581-0.592-15.647c0,0,3.467-4.235,3.899-9.701c0,0,5.807,3.635,5.937,11.435c0,0,4.204-8.883,0-15.382c0,0,16.498,8.349,11.535,29.497C35.021,49.602,38.385,40.473,36.637,33.405z'/>")
@@ -113,7 +115,7 @@ var ClockView = function(container,model){
 			}
 		}
 
-		//barClock.update(data);
+		barClock.update(data);
 		bezierClock.update(data);
 
 		gasLabel.html("SEK "+Math.round(gasCount()));

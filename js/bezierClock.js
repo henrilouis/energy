@@ -93,7 +93,7 @@ var BezierClock = function(container, data, options){
 	*****************************************/
 
 	var energyClock = d3.select(container).append("div")
-		.attr('id','energyClock')
+		.attr('id','energyClock2')
 		.style('width',diameter)
 		.style('background',o.backgroundColor);
 
@@ -107,7 +107,7 @@ var BezierClock = function(container, data, options){
 		dataMap = data.map(function(d) { return d.map(function(p, i) { return {x:i, y:p, y0:0}; }); });
 
 		//The data for our line
-		svg = d3.select("#energyClock").append("svg")
+		svg = d3.select("#energyClock2").append("svg")
 			.attr("width",diameter)
 			.attr("height",diameter);
 		

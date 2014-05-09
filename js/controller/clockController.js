@@ -46,16 +46,25 @@ var ClockController = function(view,model){
 		$("#energyClock, #energyClock2").hide();
 		$(view.barButton).removeClass('active');
 		$(view.bezierButton).removeClass('active');
-	}hideAll();
+	}
+	
 
 	view.barButton.click(function(){
+		hideAll();
 		$(this).addClass("active");
 		$("#energyClock").show();
-	}
+		$("#energyClock2").hide();
+	});
 
 	view.bezierButton.click(function(){
+		hideAll();
 		$(this).addClass("active");
+		$("#energyClock").hide();
 		$("#energyClock2").show();
-	}
+	});
+
+	hideAll();
+	$("#energyClock").show();
+	$(view.barButton).addClass("active");
 	
 }
