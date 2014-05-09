@@ -143,32 +143,65 @@ var BezierClock = function(container, data, options){
 		    .append("svg:path")
 		  	.attr("d", lineFunctionLinear(clipMaskInverted));
 		
+		//kan effiecienter maar kreeg het niet lekker werkend
+
 		//previous data:              
 	    //The first line SVG Path
-	    for (i=2;i>-1;i--)
-	    {
-	    	oldlineGraph = svg.append("path")
-	    	  .attr("id", "oldlineGraph"+[i])
-              .attr("d", lineFunction(oldlineData[i]))
-              .attr("stroke", o.colors[i])
+
+	    	oldlineGraph1 = svg.append("path")
+	    	  .attr("id", "oldlineGraph")
+              .attr("d", lineFunction(oldlineData[0]))
+              .attr("stroke", o.colors[0])
               .attr("stroke-width", 3)
               .attr("clip-path", "url(#invertedclipper)")
               .style("opacity", 0.2)
-              .attr("fill", o.colors[i]);
-		}
+              .attr("fill", o.colors[0]);
+
+            oldlineGraph2 = svg.append("path")
+	    	  .attr("id", "oldlineGraph")
+              .attr("d", lineFunction(oldlineData[1]))
+              .attr("stroke", o.colors[1])
+              .attr("stroke-width", 3)
+              .attr("clip-path", "url(#invertedclipper)")
+              .style("opacity", 0.2)
+              .attr("fill", o.colors[1]);
+              
+            oldlineGraph3 = svg.append("path")
+	    	  .attr("id", "oldlineGraph")
+              .attr("d", lineFunction(oldlineData[2]))
+              .attr("stroke", o.colors[2])
+              .attr("stroke-width", 3)
+              .attr("clip-path", "url(#invertedclipper)")
+              .style("opacity", 0.2)
+              .attr("fill", o.colors[2]);
+
   
 		// current data:
 		//The first line SVG Path
-		for (i=2;i>-1;i--)
-	    {
-			lineGraph = svg.append("path")
-				.attr("id", "lineGraph"+[i]	)
-	          	.attr("d", lineFunction(lineData[i]))
-	            .attr("stroke", o.colors[i])
-	            .attr("stroke-width", 3)
-	            .attr("clip-path", "url(#clipper)")
-	            .attr("fill", o.colors[i]);
-        }         
+		    lineGraph3 = svg.append("path")
+	    	  .attr("id", "oldlineGraph")
+              .attr("d", lineFunction(lineData[2]))
+              .attr("stroke", o.colors[2])
+              .attr("stroke-width", 3)
+              .attr("clip-path", "url(#clipper)")
+              .attr("fill", o.colors[2]); 
+			 
+			lineGraph2 = svg.append("path")
+	    	  .attr("id", "oldlineGraph")
+              .attr("d", lineFunction(lineData[1]))
+              .attr("stroke", o.colors[1])
+              .attr("stroke-width", 3)
+              .attr("clip-path", "url(#clipper)")
+              .attr("fill", o.colors[1]);
+
+	    	lineGraph1 = svg.append("path")
+	    	  .attr("id", "oldlineGraph")
+              .attr("d", lineFunction(lineData[0]))
+              .attr("stroke", o.colors[0])
+              .attr("stroke-width", 3)
+              .attr("clip-path", "url(#clipper)")
+              .attr("fill", o.colors[0]);
+                  
 
 	    //The average data line SVG Path
 		lineGraph4 = svg.append("path")
@@ -242,29 +275,19 @@ var BezierClock = function(container, data, options){
                         .y(function(d) { return d.y; })
                         .interpolate("cardinal-closed");
   	
-       	//lineGraph.transition()
-		//	.attr("d", lineFunction(lineData[0]));
-
-		oldlineGraph.select("#oldlineGraph").selectAll('path')
-		.transition()
+        //kan effiecienter maar kreeg het niet lekker werkend
+		oldlineGraph3.transition()
 			.attr("d", lineFunction(lineData[2]));
-		
-		lineGraph.select("g")
-			.transition()
+		oldlineGraph2.transition()
 			.attr("d", lineFunction(lineData[2]));
-		
-		d3.select("linegraph3")
-			.transition()
+		oldlineGraph1.transition()
 			.attr("d", lineFunction(lineData[0]));
-		
-		d3.select("#oldlinegraph1")
-			.transition()
+	
+		lineGraph3.transition()
 			.attr("d", lineFunction(oldlineData[2]));
-		d3.select("#oldlinegraph2")
-			.transition()
+		lineGraph2.transition()
 			.attr("d", lineFunction(oldlineData[1]));
-		d3.select("#oldlinegraph3")
-			.transition()
+		lineGraph1.transition()
 			.attr("d", lineFunction(oldlineData[0]));
 
 		lineGraph4.transition()
