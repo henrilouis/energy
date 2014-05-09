@@ -143,11 +143,11 @@ var BezierClock = function(container, data, options){
 		    .append("svg:path")
 		  	.attr("d", lineFunctionLinear(clipMaskInverted));
 		
-		//kan effiecienter maar kreeg het niet lekker werkend
+		//kan effiecienter maar kreeg het niet lekker werkend met for loop
 
 		//previous data:              
 	    //The first line SVG Path
-
+	    
 	    	oldlineGraph1 = svg.append("path")
 	    	  .attr("id", "oldlineGraph")
               .attr("d", lineFunction(oldlineData[0]))
@@ -165,7 +165,7 @@ var BezierClock = function(container, data, options){
               .attr("clip-path", "url(#invertedclipper)")
               .style("opacity", 0.2)
               .attr("fill", o.colors[1]);
-              
+
             oldlineGraph3 = svg.append("path")
 	    	  .attr("id", "oldlineGraph")
               .attr("d", lineFunction(oldlineData[2]))
@@ -174,7 +174,7 @@ var BezierClock = function(container, data, options){
               .attr("clip-path", "url(#invertedclipper)")
               .style("opacity", 0.2)
               .attr("fill", o.colors[2]);
-
+		
   
 		// current data:
 		//The first line SVG Path
@@ -279,7 +279,7 @@ var BezierClock = function(container, data, options){
 		oldlineGraph3.transition()
 			.attr("d", lineFunction(lineData[2]));
 		oldlineGraph2.transition()
-			.attr("d", lineFunction(lineData[2]));
+			.attr("d", lineFunction(lineData[1]));
 		oldlineGraph1.transition()
 			.attr("d", lineFunction(lineData[0]));
 	
@@ -300,6 +300,7 @@ var BezierClock = function(container, data, options){
 		circularAmount = 360/data[0][0].length;
 		hournumber = parseInt(getTime().slice(0, -3));
 			
+			//kan effiecienter maar dan is het misschien een idee om in het model al optelsommetjes te maken
 			for (i=0; i<data[0][0].length; i++)
 			{	
 				var circularSinValue = Math.sin(toRadians(circularAmount*[i]));
