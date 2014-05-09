@@ -43,7 +43,7 @@ var BezierClock = function(container, data, options){
 				Helper variables
 	*****************************************/
 
-	var dataSum = function(){
+	var dataSum = function(length){
 		var d = new Array;
 		for(i=0; i<data[0].length; i++){
 			d.push(0);
@@ -66,7 +66,7 @@ var BezierClock = function(container, data, options){
 		lineData[2][i]= { "x": 455+ circularSinValue*((data[0][i]+data[1][i]+data[2][i])	/maximum*o.barHeight+208),   "y":455 - circularCosValue*((data[0][i]+data[1][i]+data[2][i])	/maximum*o.barHeight+208)} ;
 		lineData[3][i]= { "x": 455+ circularSinValue*((data[0][i]+data[1][i]+data[2][i]+((Math.random()*8)-4))	/maximum*o.barHeight+208),   "y":455 - circularCosValue*((data[0][i]+data[1][i]+data[2][i]+((Math.random()*8)-4))	/maximum*o.barHeight+208)} ;
 	}
-	Math.floor(Math.random()*199) - 99
+
 	stack = d3.layout.stack().offset("zero");
 
 	var diameter = (o.centerRadius*2) + (o.centerWidth*2) + (o.gap*2) + (o.barHeight*2);
@@ -94,21 +94,14 @@ var BezierClock = function(container, data, options){
 	*****************************************/
 
 	var energyClock = d3.select(container).append("div")
-		.attr('id','energyClock2')
+		.attr('id','bezierEnergyClock')
 		.style('width',diameter)
 		.style('background',o.backgroundColor);
 
 	function drawClock(){
 
-		/*****************************************
-				Creating the bar-charts
-		*****************************************/
-		
-		// The mapping function that creates the normally data type for stacked barcharts
-		dataMap = data.map(function(d) { return d.map(function(p, i) { return {x:i, y:p, y0:0}; }); });
-
 		//The data for our line
-		svg = d3.select("#energyClock2").append("svg")
+		svg = d3.select("#bezierEnergyClock").append("svg")
 			.attr("width",diameter)
 			.attr("height",diameter);
 		
