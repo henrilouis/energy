@@ -6,8 +6,8 @@ var ClockView = function(container,model){
 	var barButton = 		$("<button title='Bar View' class='btn btn-default active'>");
 	var bezierButton = 		$("<button title='Bezier View' class='btn btn-default'>");
 
-	var barSpan = 			$("<span class='glyphicon glyphicon-th-large'>");
-	var bezierSpan = 		$("<span class='glyphicon glyphicon-th-list'>");
+	var barSpan = 			$("<span class='glyphicon glyphicon-stats'>");
+	var bezierSpan = 		$("<span class='glyphicon glyphicon-record'>");
 
 	barButton.append(barSpan);
 	bezierButton.append(bezierSpan);
