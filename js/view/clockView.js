@@ -17,6 +17,7 @@ var ClockView = function(container,model){
 	/********************************************************************************
 							Adding the icons for each category.
 	********************************************************************************/
+	
 	var iconsContainer = $("<div id='iconsContainer'>");
 		iconsContainer.css('margin-left',($('#energyClock svg').width()/2) -112);
 		iconsContainer.css('margin-top',(-$('#energyClock svg').height()/2));

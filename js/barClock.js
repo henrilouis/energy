@@ -23,7 +23,6 @@ var BarClock = function(container, data, options){
 		colors					: ["#E25942","#F6CB51","#13A89E"],
 		currency				: "SEK",
 		timeFontSize			: 55,
-		unitFontSize			: 14
 
 	};
 
@@ -124,9 +123,11 @@ var BarClock = function(container, data, options){
 			barCharts.select("#bars"+i).selectAll('rect')
 					.style('fill',function(){return o.colors[i]})
 		}
+		
 		/*****************************************
 				Creating the clock center
 		*****************************************/
+
 		centerPiece = svg.append('g')
 			.attr('id','centerPiece')
 			.attr( 'transform' , 'translate('+( diameter/2 )+','+( diameter/2 )+')');
@@ -168,8 +169,6 @@ var BarClock = function(container, data, options){
 	    	.attr("text-anchor", "middle")
 	    	.style("font-size",o.timeFontSize+"px")
 	    	.style("fill",o.fontColor);
-
-	   	
 
 	}
 	drawClock();
