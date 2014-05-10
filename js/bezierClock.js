@@ -182,8 +182,9 @@ var BezierClock = function(container, data, options){
 	    //The average data line SVG Path
 		lineGraph4 = svg.append("path")
 	                  .attr("d", lineFunction(lineData[3]))
+	                  	.attr('stroke-dasharray', '10,10')
 	                    .attr("stroke", "grey")
-	                    .attr("stroke-width", 3)
+	                    .attr("stroke-width", 1)
 	                    .attr("fill", "none");
 
 		/*****************************************
