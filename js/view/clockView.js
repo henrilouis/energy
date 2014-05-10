@@ -160,7 +160,8 @@ var ClockView = function(container,model){
 	model.addObserver(this);
 	this.update = function(args){
 		
-		data = args;
+		data = model.getSelected();
+
 		if(gasBool == false){
 			for(i=0; i<data[0][0].length; i++){
 				data[0][0][i] = 0;

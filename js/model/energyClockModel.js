@@ -1,33 +1,65 @@
 var EnergyClockModel = function(){
 
-	var data, copy;
+	var data, copy, selected;
+
 	/********************************************************************************
-								Create random data.
+									Public functions.
 	********************************************************************************/
+
+	var getSelected = function(){
+		return createCopy(selected);
+	}
+	this.getSelected = getSelected;
+
+	var getData = function(){
+		return data;
+	}
+	this.getData = getData;
+
+	/********************************************************************************
+								   Create random data.
+	********************************************************************************/
+
 	var createRandomData = function(){
-		data = [ [[],[],[]] , [[],[],[]] , [[],[],[]] ];
-		for(i=0; i<3; i++){
-			for(j=0; j<24; j++){
-				data[0][i].push(Math.random()*10);
-				data[1][i].push(Math.random()*10);
-				data[2][i].push(Math.random()*10);
+		data = [];
+		for(i=0; i<356; i++){
+			data.push([]);
+			for(j=0; j<3; j++){
+				data[i].push([]);
+				for(k=0; k<3; k++){
+					data[i][j].push([]);
+					for(l=0; l<24; l++){
+						if(i == 355){
+							var date = new Date();
+							if(l>date.getHours() && j==0){
+								data[i][j][k].push(0);
+							}
+							else{
+								data[i][j][k].push(Math.random()*10);
+							}
+						}
+						else{
+							data[i][j][k].push(Math.random()*10);
+						}
+
+					}
+				}
 			}
 		}
-
-		notifyObservers(createCopy(data));
+		selected = data[data.length-1];
+		notifyObservers("init");
 	}
 
-	setInterval(createRandomData,3000);
-
 	var resendData = function(){
-		notifyObservers(createCopy(data));
+		notifyObservers();
 	}
 
 	this.resendData = resendData;
 
 	/********************************************************************************
-								Helper variable.
+							  Helper variable.
 	********************************************************************************/
+
 	var createCopy = function(data){
 		copy = [];
 
@@ -40,9 +72,9 @@ var EnergyClockModel = function(){
 				}
 			}
 		}
-
 		return copy;
 	}
+
 	/********************************************************************************
 								Observable functions.
 	********************************************************************************/
@@ -54,9 +86,10 @@ var EnergyClockModel = function(){
 	        listeners[i].update(args);
 	    }
 	};
-	this.notifyObservers =
 	
 	this.addObserver = function (listener) {
 	    listeners.push(listener);
 	};
+
+	setTimeout(createRandomData,3000);
 }
