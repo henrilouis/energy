@@ -50,18 +50,39 @@ var ScrollCalendar = function(container, data, options){
 
 	var scrollCalendar = d3.select(container).append("div")
 		.attr('id','scrollCalendar')
-		.style('background',o.backgroundColor);
+		.style('background',o.backgroundColor)
+		.style("width",function(){
+			var width = 0;
+			for(i=0;i<data.length;i++){
+				width += ( o.squareWidth + o.domainOffset + (o.squarePadding * 2) + (o.squareMargin * 2) );
+			}
+			return width+"px";
+		});
 
 	var drawCalendar = function(){
-		
+
+
+
 		var days = d3.select("#scrollCalendar")
 			.selectAll("g")
 			.data(data)
 			.enter().append("g")
-			.style("float","left")
-			.style("margin-left",o.domainOffset+"px")
+				.style("float","left")
+				.style("margin-left",o.domainOffset+"px")
+			.append("text")
+			.text(function(d,i){
+				var date = new Date();
+				date.setDate(date.getDate()-data.length+1);
+				date.setDate(date.getDate()+i);
+				var format = d3.time.format("%Y-%m-%d");
+				return format(date);
+			})
+				.style("font-size","3px");	
 
-		days.selectAll("div")
+		
+
+		
+		var items = days.selectAll("div")
 			.data(function(d,i){return d;})
 			.enter().append("div")
 				.style("background-color",function(d,i){
@@ -71,7 +92,7 @@ var ScrollCalendar = function(container, data, options){
 				.style("height",o.squareHeight+"px")
 				.style("padding",o.squarePadding+"px")
 				.style("margin",o.squareMargin+"px");
-		
+
 	}
 
 	var update = function(){

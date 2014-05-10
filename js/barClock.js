@@ -206,7 +206,7 @@ var BarClock = function(container, data, options){
 	setInterval(function(){
 		var d = new Date(Date.now());
 
-		if (d.getHours() > currentTime){
+		if (d.getHours() > currentTime || (d.getHours == 0 && currentTime == 23)){
 			clockHand.transition().attr( 'transform' , 'rotate('+scaleCalc( d.getHours() )+') translate(0,'+ -( o.centerRadius+o.centerWidth+11 ) +') scale(4)');
 		}
 		

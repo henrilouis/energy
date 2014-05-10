@@ -91,5 +91,5 @@ var EnergyClockModel = function(){
 	    listeners.push(listener);
 	};
 
-	setTimeout(createRandomData,3000);
+	setTimeout(createRandomData,300);
 }
