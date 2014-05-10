@@ -97,9 +97,12 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
+#energyClock{
+    width:710px;
+    margin:auto;
+}
 
 #barEnergyClock, #bezierEnergyClock{
-    margin:auto;
     font-family: 'Open Sans', serif;
     font-weight: 500; 
 }

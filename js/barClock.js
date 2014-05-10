@@ -21,7 +21,6 @@ var BarClock = function(container, data, options){
 		handColor				: "#E25942",
 		mainColor				: "#E25942",
 		colors					: ["#E25942","#F6CB51","#13A89E"],
-		currency				: "SEK",
 		timeFontSize			: 55,
 
 	};
@@ -84,7 +83,7 @@ var BarClock = function(container, data, options){
 				Creating the bar-charts
 		*****************************************/
 
-		// The mapping function that creates the normally data type for stacked barcharts
+		// The mapping function that creates the normal data type for stacked barcharts
 		dataMap = data[0].map(function(d) { return d.map(function(p, i) { return {x:i, y:p, y0:0}; }); });
 
 		svg = d3.select("#barEnergyClock").append("svg")

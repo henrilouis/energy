@@ -1,30 +1,16 @@
 var ClockView = function(container,model){
-	var menuContainer = $("<div id='menuContainer'>");
-
-	var buttonGroup = 		$("<div class='btn-group'>");
-
-	var barButton = 		$("<button title='Bar View' class='btn btn-default active'>");
-	var bezierButton = 		$("<button title='Bezier View' class='btn btn-default'>");
-
-	var barSpan = 			$("<span class='glyphicon glyphicon-stats'>");
-	var bezierSpan = 		$("<span class='glyphicon glyphicon-record'>");
-
-	barButton.append(barSpan);
-	bezierButton.append(bezierSpan);
-
-	buttonGroup.append(barButton,bezierButton);
 
 	var data =[ 	//today
 				[	[4,7,3,5,6,5,1,1,2,3,4,5,6,7,8,9,8,7,6,5,5,4,6,4],
 					[9,9,8,8,7,7,7,6,6,5,5,4,4,4,4,3,3,3,2,2,2,1,1,1],
 					[9,8,7,6,5,4,3,2,1,0,1,2,3,4,5,6,7,8,9,8,7,2,3,4]
 			   	],
-			   	//yesterday
+			   		//yesterday
 			   	[	[9,8,7,6,5,4,3,2,1,0,1,2,3,4,5,6,7,8,9,8,7,1,1,1],
 					[4,7,3,5,6,5,1,1,2,3,4,5,6,7,8,9,8,7,6,5,5,1,3,4],
 					[9,9,8,8,7,7,7,6,6,5,5,4,4,4,4,3,3,3,2,2,2,1,1,1]
 				],
-				//averages
+					//averages
 				[	[7,6,7,6,5,3,5,1,1,0,2,2,4,4,7,6,6,8,3,8,7,5,5,4],
 					[5,7,3,5,6,5,1,4,3,3,4,5,6,7,6,9,8,6,6,5,4,4,3,6],
 					[9,7,8,1,7,7,7,3,6,4,5,4,4,4,4,3,3,3,2,1,2,1,3,1]
@@ -35,12 +21,39 @@ var ClockView = function(container,model){
 
 	var options = {
 
-			colors					: ["#E25942","#F6CB51","#13A89E"]
+			barHeight 				: 150,
+			barWidth				: 10,
+			gap 					: 20,
+			centerRadius 			: 170,
+			centerWidth				: 15,
+			backgroundColor			: "#FFFFFF",
+			fontColor				: "#3F4953",
+			handColor				: "#E25942",
+			mainColor				: "#E25942",
+			colors					: ["#E25942","#F6CB51","#13A89E"],
+			timeFontSize			: 55,
 
 		}
 	
 	var barClock = new BarClock(container,data, options);
 	var bezierClock = new BezierClock(container,data, options);
+
+	/********************************************************************************
+								Adding navigation.
+	********************************************************************************/
+
+	var menuContainer = 	$("<div id='menuContainer'>");
+	var buttonGroup = 		$("<div class='btn-group'>");
+
+	var barButton = 		$("<button title='Bar View' class='btn btn-default active'>");
+	var bezierButton = 		$("<button title='Bezier View' class='btn btn-default'>");
+
+	var barSpan = 			$("<span class='glyphicon glyphicon-stats'>");
+	var bezierSpan = 		$("<span class='glyphicon glyphicon-record'>");
+
+	barButton.append(barSpan);
+	bezierButton.append(bezierSpan);
+	buttonGroup.append(barButton,bezierButton);
 
 	/********************************************************************************
 							Adding the icons for each category.
@@ -49,8 +62,6 @@ var ClockView = function(container,model){
 	var iconsContainer = $("<div id='iconsContainer'>");
 		iconsContainer.css('margin-left',($('#barEnergyClock svg').width()/2) -112);
 		iconsContainer.css('margin-top',(-$('#barEnergyClock svg').height()/2));
-		iconsContainer.css('margin-left',($('#bezierEnergyClock svg').width()/2) -112);
-		iconsContainer.css('margin-top',(-$('#bezierEnergyClock svg').height()/2));
 
 	var gasContainer = $("<div class='iconContainer'>");
 	var gasIcon = $("<svg width='40' height='54'><path fill='"+options.colors[0]+"' d='M36.637,33.405C34.373,24.244,9.214,0,9.214,0S3.727,24.244,1.461,33.405c-2.106,8.522,2.276,16.261,8.345,20.356c-1.802-5.667-3.188-12.581-0.592-15.647c0,0,3.467-4.235,3.899-9.701c0,0,5.807,3.635,5.937,11.435c0,0,4.204-8.883,0-15.382c0,0,16.498,8.349,11.535,29.497C35.021,49.602,38.385,40.473,36.637,33.405z'/>")
@@ -100,55 +111,6 @@ var ClockView = function(container,model){
 	$(container).append(buttonGroup);
 
 	/********************************************************************************
-						Creating random data to test with.
-	********************************************************************************/
-
-	var updateClock = function(){
-
-		data = [ [[],[],[]] , [[],[],[]] , [[],[],[]] ];
-
-		for(i=0; i<3; i++){
-			for(j=0; j<24; j++){
-				data[0][i].push(Math.random()*10);
-				data[1][i].push(Math.random()*10);
-				data[2][i].push(Math.random()*10);
-			}
-		}
-
-		if(gasBool == false){
-			for(i=0; i<24; i++){
-				data[0][0][i] = 0;
-				data[1][0][i] = 0;
-				data[1][0][i] = 0;
-			}
-		}
-		if(elecBool == false){
-			for(i=0; i<24; i++){
-				data[0][1][i] = 0;
-				data[1][1][i] = 0;
-				data[2][1][i] = 0;
-			}
-		}
-		if(waterBool == false){
-			for(i=0; i<24; i++){
-				data[0][2][i] = 0;
-				data[1][2][i] = 0;
-				data[2][2][i] = 0;
-			}
-		}
-
-		barClock.update(data);
-		bezierClock.update(data);
-
-		gasLabel.html("SEK "+Math.round(gasCount()));
-		elecLabel.html("SEK "+Math.round(elecCount()));
-		waterLabel.html("SEK "+Math.round(waterCount()));
-
-	}
-
-	setInterval(updateClock,3000);
-
-	/********************************************************************************
 							 Public variables and functions
 	********************************************************************************/
 	this.barButton 			= barButton;
@@ -163,7 +125,6 @@ var ClockView = function(container,model){
 	this.waterIcon 			= waterIcon;
 
 	this.options 			= options;
-	this.updateClock		= updateClock;
 
 	this.toggleGas 			= function(){
 
@@ -173,7 +134,7 @@ var ClockView = function(container,model){
 		else{
 			gasBool = true;
 		}
-
+		model.resendData();
 	};
 	this.toggleElec			= function(){
 
@@ -183,7 +144,7 @@ var ClockView = function(container,model){
 		else{
 			elecBool = true;
 		}
-
+		model.resendData();
 	};
 	this.toggleWater		= function(){
 
@@ -193,11 +154,44 @@ var ClockView = function(container,model){
 		else{
 			waterBool = true;
 		}
-
+		model.resendData();
 	};
 
+	model.addObserver(this);
 	this.update = function(args){
 		
+		data = args;
+		if(gasBool == false){
+			for(i=0; i<data[0][0].length; i++){
+				data[0][0][i] = 0;
+				data[1][0][i] = 0;
+				data[2][0][i] = 0;
+			}
+		}
+
+		if(elecBool == false){
+			for(i=0; i<data[0][0].length; i++){
+				data[0][1][i] = 0;
+				data[1][1][i] = 0;
+				data[2][1][i] = 0;
+			}
+		}
+
+		if(waterBool == false){
+			for(i=0; i<data[0][0].length; i++){
+				data[0][2][i] = 0;
+				data[1][2][i] = 0;
+				data[2][2][i] = 0;
+			}
+		}
+
+		barClock.update(data);
+		bezierClock.update(data);
+
+		gasLabel.html("SEK "+Math.round(gasCount()));
+		elecLabel.html("SEK "+Math.round(elecCount()));
+		waterLabel.html("SEK "+Math.round(waterCount()));
+
 	}
 
 }

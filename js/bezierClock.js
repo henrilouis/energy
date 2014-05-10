@@ -25,7 +25,6 @@ var BezierClock = function(container, data, options){
 		handColor				: "#E25942",
 		mainColor				: "#E25942",
 		colors					: ["#E25942","#F6CB51","#13A89E"],
-		currency				: "SEK",
 		timeFontSize			: 55,
 		unitFontSize			: 14
 
@@ -209,13 +208,13 @@ var BezierClock = function(container, data, options){
 	    		.attr("cx", 0)
 	    		.attr("cy", 0)
 	    		.attr("r", o.centerRadius+o.centerWidth)
-	    		.attr("id", function(d, i) { return "grad" + i; });
+	    		.attr("id", function(d, i) { return "grad1"; });
 			arcGradient.append("stop").attr("offset", "55%").style("stop-color", "white");
 			arcGradient.append("stop").attr("offset", "100%").style("stop-color", function(d, i) { return o.mainColor; });
 
 		centerPiece.append( "path" )
 			.attr( "d" , handArc )
-			.attr("fill", function(d, i) { return "url(#grad" + i + ")"});
+			.attr("fill", function(d, i) { return "url(#grad1)"});
 			
 		clockHand = centerPiece.append( "path" )
 			.attr( 'transform' , 'rotate('+scaleCalc( currentTime )+') translate(0,'+ -( o.centerRadius+o.centerWidth+11 ) +') scale(4)')

@@ -4,14 +4,12 @@ var ClockController = function(view,model){
 		if($(this).hasClass('disabled')){
 			$(this).removeClass('disabled');
 			$(this).find('path').attr('fill',view.options.colors[0]);
-			$(this).find
 			view.toggleGas();
 		}else{
 			$(this).addClass('disabled');
 			$(this).find('path').attr('fill',"#ccc");
 			view.toggleGas();
 		}
-		view.updateClock();
 	});
 
 	view.elecContainer.click(function(event) {
@@ -25,7 +23,6 @@ var ClockController = function(view,model){
 			$(this).find('polygon').attr('fill',"#ccc");
 			view.toggleElec();
 		}
-		view.updateClock();
 	});
 
 	view.waterContainer.click(function(event) {
@@ -39,7 +36,6 @@ var ClockController = function(view,model){
 			$(this).find('path').attr('fill',"#ccc");
 			view.toggleWater();
 		}
-		view.updateClock();
 	});
 
 	function hideAll(){
