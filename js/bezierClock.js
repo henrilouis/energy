@@ -328,7 +328,12 @@ var BezierClock = function(container, data, options){
 				oldlineData[0][i]= { "x": diameter/2+ circularSinValue*((data[1][0][i])								/maximum*o.barHeight+208),   "y":diameter/2 - circularCosValue*((data[1][0][i])								/maximum*o.barHeight+208)} ;
 				oldlineData[1][i]= { "x": diameter/2+ circularSinValue*((data[1][0][i]+data[0][1][i])				/maximum*o.barHeight+208),   "y":diameter/2 - circularCosValue*((data[1][0][i]+data[0][1][i])				/maximum*o.barHeight+208)} ;
 				oldlineData[2][i]= { "x": diameter/2+ circularSinValue*((data[1][0][i]+data[0][1][i]+data[0][2][i])	/maximum*o.barHeight+208),   "y":diameter/2 - circularCosValue*((data[1][0][i]+data[0][1][i]+data[0][2][i])	/maximum*o.barHeight+208)} ;
-			}
+			}	
+				//data from previous day is startpoint for new day
+				oldlineData[0][0]= lineData[0][0];
+				oldlineData[1][0]= lineData[1][0];
+				oldlineData[2][0]= lineData[2][0];
+
 			return lineData;
 			return oldlineData;
 	}
