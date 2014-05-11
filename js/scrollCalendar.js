@@ -9,7 +9,7 @@ var ScrollCalendar = function(container, data, options){
 
 	var defaults = {
 
-		squareHeight			: 10,
+		squareHeight			: 5,
 		squareWidth				: 20,
 		squarePadding			: 0,
 		squareMargin			: 0,
@@ -24,6 +24,7 @@ var ScrollCalendar = function(container, data, options){
 
 	var options = $.extend(defaults,options);
 	var o = options;
+	var width;
 
 	/*****************************************
 				Public functions
@@ -43,25 +44,28 @@ var ScrollCalendar = function(container, data, options){
 		return o.colors[colorNumber-1];
 	}
 
-
 	/*****************************************
 			  Creating the calendar
 	*****************************************/
 
-	var scrollCalendar = d3.select(container).append("div")
+	var scrollCalendarContainer = d3.select(container).append("div")
+		.attr('id','scrollCalendarContainer');
+
+	var scrollCalendar = scrollCalendarContainer.append("div")
 		.attr('id','scrollCalendar')
-		.style('background',o.backgroundColor)
 		.style("width",function(){
-			var width = 0;
+			width = 0;
 			for(i=0;i<data.length;i++){
 				width += ( o.squareWidth + o.domainOffset + (o.squarePadding * 2) + (o.squareMargin * 2) );
 			}
+			width += ($(window).innerWidth()/2);
 			return width+"px";
+		})
+		.style("height",function(){
+			return ( o.squareHeight + ( o.squarePadding*2) + ( o.squareMargin*2 ) ) * data[0].length+"px";
 		});
 
 	var drawCalendar = function(){
-
-
 
 		var days = d3.select("#scrollCalendar")
 			.selectAll("g")
@@ -78,9 +82,6 @@ var ScrollCalendar = function(container, data, options){
 				return format(date);
 			})
 				.style("font-size","3px");	
-
-		
-
 		
 		var items = days.selectAll("div")
 			.data(function(d,i){return d;})
@@ -92,8 +93,21 @@ var ScrollCalendar = function(container, data, options){
 				.style("height",o.squareHeight+"px")
 				.style("padding",o.squarePadding+"px")
 				.style("margin",o.squareMargin+"px");
-
+		
+		$("#scrollCalendarContainer").css('width',$(window).width());
+		$("#scrollCalendarContainer").css('overflow-x','hidden');
+		$("#scrollCalendarContainer").scrollLeft($("#scrollCalendar").width());
+		$("#scrollCalendarContainer").css('-webkit-overflow-scrolling', 'touch');
 	}
+
+
+
+	/*****************************************
+			  Scrolling using jQuery
+			  functions
+
+	*****************************************/
+
 
 	var update = function(){
 

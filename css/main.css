@@ -130,6 +130,11 @@ textarea {
     display:none;
 }
 
+#calendar{
+    position:fixed;
+    bottom:0px;
+}
+
 
 /* ==========================================================================
    Helper classes
