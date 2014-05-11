@@ -37,6 +37,8 @@ var ClockView = function(container,model){
 	
 	var barClock = new BarClock(container,data, options);
 	var bezierClock = new BezierClock(container,data, options);
+	this.barClock = barClock;
+	this.bezierClock = bezierClock;
 
 	/********************************************************************************
 								Adding navigation.
@@ -188,6 +190,11 @@ var ClockView = function(container,model){
 
 		barClock.update(data);
 		bezierClock.update(data);
+
+		barClock.selectDate(model.getSelectedDate());
+		bezierClock.selectDate(model.getSelectedDate());
+
+		var d = new Date();
 
 		gasLabel.html("SEK "+Math.round(gasCount()));
 		elecLabel.html("SEK "+Math.round(elecCount()));

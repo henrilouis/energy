@@ -12,8 +12,8 @@ var ScrollCalendar = function(container, data, options, model){
 		squareHeight			: 5,
 		squareWidth				: 20,
 		squarePadding			: 0,
-		squareMargin			: 0,
-		domainOffset 			: 10,
+		squareMargin			: 1,
+		domainOffset 			: 20,
 		selectionPadding		: 10,
 		backgroundColor			: "#FFFFFF",
 		fontColor				: "#EFEFEF",
@@ -62,7 +62,7 @@ var ScrollCalendar = function(container, data, options, model){
 			return width+"px";
 		})
 		.style("height",function(){
-			return ( o.squareHeight + ( o.squarePadding*2) + ( o.squareMargin*2 ) ) * data[0].length+"px";
+			return ( o.squareHeight + ( o.squarePadding*2) + ( o.squareMargin ) ) * data[0].length+"px";
 		})
 		.style("margin-left",function(){
 			return $(window).innerWidth()/2+"px";
@@ -75,16 +75,7 @@ var ScrollCalendar = function(container, data, options, model){
 			.data(data)
 			.enter().append("g")
 				.style("float","left")
-				.style("margin-left",o.domainOffset+"px")
-			.append("text")
-			.text(function(d,i){
-				var date = new Date();
-				date.setDate(date.getDate()-data.length+1);
-				date.setDate(date.getDate()+i);
-				var format = d3.time.format("%Y-%m-%d");
-				return format(date);
-			})
-				.style("font-size","3px");	
+				.style("margin-left",o.domainOffset+"px");
 		
 		var items = days.selectAll("div")
 			.data(function(d,i){return d;})
@@ -97,27 +88,32 @@ var ScrollCalendar = function(container, data, options, model){
 				.style("padding",o.squarePadding+"px")
 				.style("margin",o.squareMargin+"px");
 		
-		$("#scrollCalendarContainer").css('width',$(window).width());
+		$("#scrollCalendarContainer").css('width',$(window).innerWidth());
 		$("#scrollCalendarContainer").scrollLeft($("#scrollCalendar").width());
 		
 	}
-
-
 
 	/*****************************************
 			  Scrolling using jQuery
 			  functions
 	*****************************************/
-	$("#scrollCalendarContainer").css('overflow-x','scroll');
-	$("#scrollCalendarContainer").addClass('-webkit-overflow-scrolling','touch');
+	
+	if (navigator.userAgent.match(/(iPod|iPhone|iPad)/)) {
+		$("#scrollCalendarContainer").css('overflow','scroll');
+	}
+	else{
+		$("#scrollCalendarContainer").css('overflow-x','scroll');
+	}
 
 	$("#scrollCalendarContainer").scroll(function(event) {
-		var workWidth = $("#scrollCalendarContainer").scrollLeft()-($(window).width());
-		var totalWidth = $("#scrollCalenar").width()-($(window).width());
+		var workWidth = $("#scrollCalendarContainer").scrollLeft()-($(window).innerWidth());
+		var totalWidth = $("#scrollCalenar").width()-($(window).innerWidth());
 		var pos = workWidth - totalWidth;
-		var selection = Math.round(pos / $('#scrollCalendar g').outerWidth(true));
+		var selection = Math.round(pos / $('#scrollCalendar g').outerWidth(true))-1;
+
 		//console.log(selection);
-		model.setSelected(selection-1);
+		if(selection>-1)
+		model.setSelected(selection);
 	});
 
 	var update = function(){
@@ -125,4 +121,5 @@ var ScrollCalendar = function(container, data, options, model){
 	}
 
 	drawCalendar();
+	$("#calendar").toggle();
 }

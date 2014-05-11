@@ -2,6 +2,8 @@ var BezierClock = function(container, data, options){
 
 	var date 					= new Date();
 	var currentTime 			= date.getHours();
+	var selectedDate;
+	var dateBool 				= false;
 	var svg, barCharts, centerPiece, backgroundCircle, handArc, arcGradient, clockHand, clockTime, 
 		gasIcon, electricityIcon, waterIcon, gasMeter, electricityMeter, waterMeter;
 	var lineData = [[],[],[],[]];
@@ -26,7 +28,7 @@ var BezierClock = function(container, data, options){
 		mainColor				: "#E25942",
 		colors					: ["#E25942","#F6CB51","#13A89E"],
 		timeFontSize			: 55,
-		unitFontSize			: 14
+		dateFontSize			: 35,
 
 	};
 
@@ -36,9 +38,26 @@ var BezierClock = function(container, data, options){
 	/*****************************************
 				Public functions
 	*****************************************/
+	
+	var dateToggle = function(){
+		if(!dateBool){
+			dateBool = true;
+		}
+		else{
+			dateBool = false;
+		}
+		clockUpdate();
+	}
+
+	var selectDate = function(date){
+		selectedDate = date;
+		clockUpdate();
+	}
 
 	this.drawClock 				= drawClock;
 	this.update 				= update;
+	this.dateToggle				= dateToggle;
+	this.selectDate				= selectDate;
 
 	/*****************************************
 				Helper variables
@@ -341,16 +360,25 @@ var BezierClock = function(container, data, options){
 		every second
 	*****************************************/
 	
-	setInterval(function(){
-		var d = new Date(Date.now());
-
-		if (d.getHours() > currentTime || (d.getHours == 0 && currentTime == 23)){
-			clockHand.transition().attr( 'transform' , 'rotate('+scaleCalc( d.getHours() )+') translate(0,'+ -( o.centerRadius+o.centerWidth+11 ) +') scale(4)');
+	var clockUpdate = function(){
+		if(dateBool){
+			var format = d3.time.format("%Y-%m-%d");
+			clockTime.text(format(selectedDate))
+			.style("font-size",o.dateFontSize+"px");
 		}
-		
-		// Also updating currentTime
-		currentTime = d.getHours();
-		clockTime.text(getTime());
-	},1000)
+		else{
+			var d = new Date(Date.now());
+
+			if (d.getHours() > currentTime || (d.getHours == 0 && currentTime == 23)){
+				clockHand.transition().attr( 'transform' , 'rotate('+scaleCalc( d.getHours() )+') translate(0,'+ -( o.centerRadius+o.centerWidth+11 ) +') scale(4)');
+			}
+			
+			// Also updating currentTime
+			currentTime = d.getHours();
+			clockTime.text(getTime())
+			.style("font-size",o.timeFontSize+"px");
+		}
+	}
+	setInterval(clockUpdate,1000)
 
 }

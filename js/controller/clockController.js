@@ -36,11 +36,14 @@ var ClockController = function(view,model){
 			$(this).find('path').attr('fill',"#ccc");
 			view.toggleWater();
 		}
+
 	});
 
 	$("#clockTime").click(function(event) {
 
-		$("#calendar").toggle();		
+		$("#calendar").toggle();
+		view.barClock.dateToggle();
+		view.bezierClock.dateToggle();
 
 	});
 
@@ -68,7 +71,5 @@ var ClockController = function(view,model){
 	hideAll();
 	$("#barEnergyClock").show();
 	$(view.barButton).addClass("active");
-
-
 	
 }

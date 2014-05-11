@@ -1,18 +1,31 @@
 var EnergyClockModel = function(){
 
-	var data, copy, selected;
+	var data, copy, selected, selectedNumber;
 
 	/********************************************************************************
 									Public functions.
 	********************************************************************************/
 
+	// get current dataset to put in the clocks
 	var getSelected = function(){
 		return createCopy(selected);
 	}
 	this.getSelected = getSelected;
 
+	// get the number to calculate date from.. for now we use only days
+	var getSelectedDate = function(){
+		var d = new Date();
+		if(selectedNumber){
+			d.setDate(d.getDate()-data.length);
+			d.setDate(d.getDate()+selectedNumber+1);
+		}
+		return d;
+	}
+	this.getSelectedDate = getSelectedDate;
+
 	var setSelected = function(value){
 		selected = data[value];
+		selectedNumber = value;
 		notifyObservers();
 	}
 	this.setSelected = setSelected;
