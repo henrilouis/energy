@@ -4,6 +4,8 @@ var CalendarView = function(container,model){
 								   [9,8,7,6,5,4,3,2,1,2,3,4,5,6,7,8,9,8,7,6,5,4,3,2]];
 	var options 				= [];
 
+	
+
 	model.addObserver(this);
 
 	this.update = function(args){
@@ -19,7 +21,7 @@ var CalendarView = function(container,model){
 
 				}
 			}
-			var scrollCalendar = new ScrollCalendar(container,data,options);
+			var scrollCalendar = new ScrollCalendar(container,data,options, model);
 		}
 		
 	}

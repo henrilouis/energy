@@ -38,6 +38,12 @@ var ClockController = function(view,model){
 		}
 	});
 
+	$("#clockTime").click(function(event) {
+
+		$("#calendar").toggle();		
+
+	});
+
 	function hideAll(){
 		$("#barEnergyClock, #bezierEnergyClock").hide();
 		$(view.barButton).removeClass('active');
@@ -62,5 +68,7 @@ var ClockController = function(view,model){
 	hideAll();
 	$("#barEnergyClock").show();
 	$(view.barButton).addClass("active");
+
+
 	
 }

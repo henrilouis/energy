@@ -11,6 +11,12 @@ var EnergyClockModel = function(){
 	}
 	this.getSelected = getSelected;
 
+	var setSelected = function(value){
+		selected = data[value];
+		notifyObservers();
+	}
+	this.setSelected = setSelected;
+
 	var getData = function(){
 		return data;
 	}

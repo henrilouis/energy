@@ -131,8 +131,13 @@ textarea {
 }
 
 #calendar{
+    
     position:fixed;
     bottom:0px;
+}
+
+#clockTime{
+    cursor: pointer;
 }
 
 

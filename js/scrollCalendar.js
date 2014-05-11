@@ -1,4 +1,4 @@
-var ScrollCalendar = function(container, data, options){
+var ScrollCalendar = function(container, data, options, model){
 
 	var date 					= new Date();
 	var currentTime 			= date.getHours();
@@ -58,11 +58,14 @@ var ScrollCalendar = function(container, data, options){
 			for(i=0;i<data.length;i++){
 				width += ( o.squareWidth + o.domainOffset + (o.squarePadding * 2) + (o.squareMargin * 2) );
 			}
-			width += ($(window).innerWidth()/2);
+			width += $(window).innerWidth()/2;
 			return width+"px";
 		})
 		.style("height",function(){
 			return ( o.squareHeight + ( o.squarePadding*2) + ( o.squareMargin*2 ) ) * data[0].length+"px";
+		})
+		.style("margin-left",function(){
+			return $(window).innerWidth()/2+"px";
 		});
 
 	var drawCalendar = function(){
@@ -95,9 +98,8 @@ var ScrollCalendar = function(container, data, options){
 				.style("margin",o.squareMargin+"px");
 		
 		$("#scrollCalendarContainer").css('width',$(window).width());
-		$("#scrollCalendarContainer").css('overflow-x','hidden');
 		$("#scrollCalendarContainer").scrollLeft($("#scrollCalendar").width());
-		$("#scrollCalendarContainer").css('-webkit-overflow-scrolling', 'touch');
+		
 	}
 
 
@@ -105,9 +107,18 @@ var ScrollCalendar = function(container, data, options){
 	/*****************************************
 			  Scrolling using jQuery
 			  functions
-
 	*****************************************/
+	$("#scrollCalendarContainer").css('overflow-x','scroll');
+	$("#scrollCalendarContainer").addClass('-webkit-overflow-scrolling','touch');
 
+	$("#scrollCalendarContainer").scroll(function(event) {
+		var workWidth = $("#scrollCalendarContainer").scrollLeft()-($(window).width());
+		var totalWidth = $("#scrollCalenar").width()-($(window).width());
+		var pos = workWidth - totalWidth;
+		var selection = Math.round(pos / $('#scrollCalendar g').outerWidth(true));
+		//console.log(selection);
+		model.setSelected(selection-1);
+	});
 
 	var update = function(){
 
