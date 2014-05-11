@@ -315,7 +315,7 @@ var BezierClock = function(container, data, options){
 				var circularCosValue = Math.cos(toRadians(circularAmount*[i]));
 	         	clipMask[i] ={ "x": diameter/2 + circularSinValue*500,   "y":diameter/2 - circularCosValue*500};             
 	        }
-	        clipMask[clipMask.length] ={ "x": 455,"y":455};  
+	        clipMask[clipMask.length] ={ "x":  diameter/2,"y": diameter/2};  
 
 	        //clipping mask path for previous data
 	        for (j=hournumber; j<24+1;j++)
@@ -324,7 +324,7 @@ var BezierClock = function(container, data, options){
 				var circularCosValue = Math.cos(toRadians(circularAmount*[j]));
 	         	clipMaskInverted[j-hournumber] ={ "x": diameter/2+ circularSinValue*500,   "y":diameter/2 - circularCosValue*500};             
 	        }
-	        clipMaskInverted[clipMaskInverted.length] ={ "x": 455,"y":455}; 
+	        clipMaskInverted[clipMaskInverted.length] ={ "x":  diameter/2,"y": diameter/2}; 
 
 			//kan effiecienter maar dan is het misschien een idee om in het model al optelsommetjes te maken
 			for (i=0; i<data[0][0].length; i++)
