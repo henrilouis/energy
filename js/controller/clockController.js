@@ -1,6 +1,6 @@
 var ClockController = function(view,model){
 
-	var calendarBool;
+	var calendarBool = false;
 
 	view.gasContainer.click(function(event) {
 
@@ -44,18 +44,31 @@ var ClockController = function(view,model){
 
 	$(".clockTime").click(function(event) {
 
-		if(calendarBool){
-			calendarBool = false;
+		var calendarHeight = $("#calendar").height();
+		var speed = 500;
+
+		if(!calendarBool){
+
+			calendarBool = true;
+			$("#calendar").animate({
+				bottom: 0,
+				},speed, function() {
+				/* stuff to do after animation is complete */
+			});
 		}
 		else{
-			calendarBool = true;
-		}
-		if(!calendarBool){
+
+			calendarBool = false;
+			$("#calendar").animate({
+				bottom: -calendarHeight,
+				},speed, function() {
+				/* stuff to do after animation is complete */
+			});
+
 			$("#scrollCalendarContainer").scrollLeft($("#scrollCalendar").width());
 			model.setLatestSelected();
 		}
 
-		$("#calendar").toggle();
 		view.barClock.dateToggle();
 		view.bezierClock.dateToggle();
 

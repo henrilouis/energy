@@ -111,7 +111,7 @@ var ScrollCalendar = function(container, data, options, model){
 		var pos = workWidth - totalWidth;
 		var selection = Math.round(pos / $('#scrollCalendar g').outerWidth(true))-1;
 
-		console.log(selection);
+		//console.log(selection);
 		if(selection>=0){
 			model.setSelected(selection);
 		}
@@ -123,5 +123,9 @@ var ScrollCalendar = function(container, data, options, model){
 	}
 
 	drawCalendar();
-	$("#calendar").toggle();
+
+	// dirty stuff hiding the container
+	var calendarHeight = $("#calendar").height();
+	$("#calendar").css("bottom",-calendarHeight);
+
 }
