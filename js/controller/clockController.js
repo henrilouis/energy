@@ -1,4 +1,7 @@
 var ClockController = function(view,model){
+
+	var calendarBool;
+
 	view.gasContainer.click(function(event) {
 
 		if($(this).hasClass('disabled')){
@@ -40,6 +43,16 @@ var ClockController = function(view,model){
 	});
 
 	$("#clockTime").click(function(event) {
+
+		if(calendarBool){
+			calendarBool = false;
+		}
+		else{
+			calendarBool = true;
+		}
+		if(!calendarBool){
+			$("#scrollCalendarContainer").scrollLeft($("#scrollCalendar").width());
+		}
 
 		$("#calendar").toggle();
 		view.barClock.dateToggle();
