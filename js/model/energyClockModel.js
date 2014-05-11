@@ -30,6 +30,13 @@ var EnergyClockModel = function(){
 	}
 	this.setSelected = setSelected;
 
+	var setLatestSelected= function(){
+		selected = data[data.length-1];
+		selectedNumber = data.length-1;
+		notifyObservers();
+	}
+	this.setLatestSelected = setLatestSelected;
+
 	var getData = function(){
 		return data;
 	}
@@ -65,7 +72,7 @@ var EnergyClockModel = function(){
 				}
 			}
 		}
-		selected = data[data.length-1];
+		setLatestSelected();
 		notifyObservers("init");
 	}
 

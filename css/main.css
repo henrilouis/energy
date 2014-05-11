@@ -107,15 +107,17 @@ textarea {
     font-weight: 500; 
 }
 
-#clockTime{
+.clockTime{
     letter-spacing: 5px;
     font-weight: 300;
+    cursor: pointer;
 }
 
 .iconContainer{
     width:75px;
     text-align:center;
     float:left;
+    cursor: pointer;
 }
 
 #iconsContainer{
@@ -134,10 +136,6 @@ textarea {
     
     position:fixed;
     bottom:0px;
-}
-
-#clockTime{
-    cursor: pointer;
 }
 
 

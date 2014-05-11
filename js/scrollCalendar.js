@@ -9,11 +9,11 @@ var ScrollCalendar = function(container, data, options, model){
 
 	var defaults = {
 
-		squareHeight			: 5,
-		squareWidth				: 20,
+		squareHeight			: 7,
+		squareWidth				: 30,
 		squarePadding			: 0,
-		squareMargin			: 1,
-		domainOffset 			: 20,
+		squareMargin			: 0,
+		domainOffset 			: 10,
 		selectionPadding		: 10,
 		backgroundColor			: "#FFFFFF",
 		fontColor				: "#EFEFEF",

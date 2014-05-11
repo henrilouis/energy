@@ -42,7 +42,7 @@ var ClockController = function(view,model){
 
 	});
 
-	$("#clockTime").click(function(event) {
+	$(".clockTime").click(function(event) {
 
 		if(calendarBool){
 			calendarBool = false;
@@ -52,6 +52,7 @@ var ClockController = function(view,model){
 		}
 		if(!calendarBool){
 			$("#scrollCalendarContainer").scrollLeft($("#scrollCalendar").width());
+			model.setLatestSelected();
 		}
 
 		$("#calendar").toggle();
