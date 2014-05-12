@@ -145,15 +145,15 @@ var BezierClock = function(container, data, options){
 		  	.attr("d", lineFunctionLinear(clipMaskInverted));
 		
 		//kan effiecienter met for loop maar kreeg het niet lekker werkend (kon ze niet meer aanpassen)
-		//previous data:              
-    	oldlineGraph1 = svg.append("path")
+		//previous data:
+		oldlineGraph3 = svg.append("path")
     	  .attr("id", "oldlineGraph")
-          .attr("d", lineFunction(oldlineData[0]))
-          .attr("stroke", o.colors[0])
+          .attr("d", lineFunction(oldlineData[2]))
+          .attr("stroke", o.colors[2])
           .attr("stroke-width", 3)
           .attr("clip-path", "url(#invertedclipper)")
           .style("opacity", 0.2)
-          .attr("fill", o.colors[0]);
+          .attr("fill", o.colors[2]);
 
         oldlineGraph2 = svg.append("path")
     	  .attr("id", "oldlineGraph")
@@ -164,14 +164,14 @@ var BezierClock = function(container, data, options){
           .style("opacity", 0.2)
           .attr("fill", o.colors[1]);
 
-        oldlineGraph3 = svg.append("path")
+    	oldlineGraph1 = svg.append("path")
     	  .attr("id", "oldlineGraph")
-          .attr("d", lineFunction(oldlineData[2]))
-          .attr("stroke", o.colors[2])
+          .attr("d", lineFunction(oldlineData[0]))
+          .attr("stroke", o.colors[0])
           .attr("stroke-width", 3)
           .attr("clip-path", "url(#invertedclipper)")
           .style("opacity", 0.2)
-          .attr("fill", o.colors[2]);
+          .attr("fill", o.colors[0]);
 		  
 		// current data:
 	    lineGraph3 = svg.append("path")
@@ -285,18 +285,18 @@ var BezierClock = function(container, data, options){
   	
         //kan effiecienter maar kreeg het niet lekker werkend met for loop (niet meer aanspreekbaar)
 		oldlineGraph3.transition()
-			.attr("d", lineFunction(lineData[2]));
+			.attr("d", lineFunction(oldlineData[2]));
 		oldlineGraph2.transition()
-			.attr("d", lineFunction(lineData[1]));
+			.attr("d", lineFunction(oldlineData[1]));
 		oldlineGraph1.transition()
-			.attr("d", lineFunction(lineData[0]));
+			.attr("d", lineFunction(oldlineData[0]));
 	
 		lineGraph3.transition()
-			.attr("d", lineFunction(oldlineData[2]));
+			.attr("d", lineFunction(lineData[2]));
 		lineGraph2.transition()
-			.attr("d", lineFunction(oldlineData[1]));
+			.attr("d", lineFunction(lineData[1]));
 		lineGraph1.transition()
-			.attr("d", lineFunction(oldlineData[0]));
+			.attr("d", lineFunction(lineData[0]));
 
 		lineGraph4.transition()
 			.attr("d", lineFunction(lineData[3]))
@@ -341,9 +341,9 @@ var BezierClock = function(container, data, options){
 				lineData[3][i]= { "x": diameter/2+ circularSinValue*((data[2][0][i]+data[2][1][i]+data[2][2][i])	/maximum*o.barHeight+208),   "y":diameter/2 - circularCosValue*((data[2][0][i]+data[2][1][i]+data[2][2][i])	/maximum*o.barHeight+208)} ;
 				
 				//previous line data
-				oldlineData[0][i]= { "x": diameter/2+ circularSinValue*((data[1][0][i])								/maximum*o.barHeight+208),   "y":diameter/2 - circularCosValue*((data[1][0][i])								/maximum*o.barHeight+208)} ;
-				oldlineData[1][i]= { "x": diameter/2+ circularSinValue*((data[1][0][i]+data[0][1][i])				/maximum*o.barHeight+208),   "y":diameter/2 - circularCosValue*((data[1][0][i]+data[0][1][i])				/maximum*o.barHeight+208)} ;
-				oldlineData[2][i]= { "x": diameter/2+ circularSinValue*((data[1][0][i]+data[0][1][i]+data[0][2][i])	/maximum*o.barHeight+208),   "y":diameter/2 - circularCosValue*((data[1][0][i]+data[0][1][i]+data[0][2][i])	/maximum*o.barHeight+208)} ;
+				oldlineData[0][i]= { "x": diameter/2+ circularSinValue*((data[2][0][i])								/maximum*o.barHeight+208),   "y":diameter/2 - circularCosValue*((data[1][0][i])								/maximum*o.barHeight+208)} ;
+				oldlineData[1][i]= { "x": diameter/2+ circularSinValue*((data[2][0][i]+data[2][1][i])				/maximum*o.barHeight+208),   "y":diameter/2 - circularCosValue*((data[1][0][i]+data[1][1][i])				/maximum*o.barHeight+208)} ;
+				oldlineData[2][i]= { "x": diameter/2+ circularSinValue*((data[2][0][i]+data[2][1][i]+data[2][2][i])	/maximum*o.barHeight+208),   "y":diameter/2 - circularCosValue*((data[1][0][i]+data[1][1][i]+data[1][2][i])	/maximum*o.barHeight+208)} ;
 			}	
 
 			//data from previous day is startpoint for new day
