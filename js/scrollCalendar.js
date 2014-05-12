@@ -11,7 +11,7 @@ var ScrollCalendar = function(container, data, options, model){
 
 		width                   : 250,
 		squareHeight			: 3,
-		squareWidth				: 30,
+		squareWidth				: 3,
 		squarePadding			: 0,
 		squareMargin			: 0,
 		domainOffset 			: 10,
@@ -20,7 +20,7 @@ var ScrollCalendar = function(container, data, options, model){
 		fontColor				: "#EFEFEF",
 		handColor				: "#E25942",
 		colors					: ["#ADD5F7","#7FB2F0","#4E7AC7","#35478C","#16193B"]
-		
+
 	};
 
 	var options = $.extend(defaults,options);
@@ -82,7 +82,7 @@ var ScrollCalendar = function(container, data, options, model){
 		.style('left',function(){
 			return (o.width/2)-((o.squareWidth+(o.squareMargin*2)+(o.squarePadding*2))/2)+"px";
 		})
-		.style('border','thin solid black');
+		.style('border','thin solid white');
 
 	var drawCalendar = function(){
 

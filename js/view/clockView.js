@@ -33,28 +33,9 @@ var ClockView = function(container,model){
 
 		}
 	
-	var barClock = new BarClock(container,data, options);
-	var bezierClock = new BezierClock(container,data, options);
-	this.barClock = barClock;
-	this.bezierClock = bezierClock;
-
-	/********************************************************************************
-								Adding navigation.
-	********************************************************************************/
-
-	var menuContainer = 	$("<div id='menuContainer'>");
-	var buttonGroup = 		$("<div class='btn-group'>");
-
-	var barButton = 		$("<button title='Bar View' class='btn btn-default active'>");
-	var bezierButton = 		$("<button title='Bezier View' class='btn btn-default'>");
-
-	var barSpan = 			$("<span class='glyphicon glyphicon-stats'>");
-	var bezierSpan = 		$("<span class='glyphicon glyphicon-record'>");
-
-	barButton.append(barSpan);
-	bezierButton.append(bezierSpan);
-	buttonGroup.append(barButton,bezierButton);
-
+	var barClock = new BarClock(container, data, options);
+	var bezierClock = new BezierClock(container, data, options);
+	
 	/********************************************************************************
 							Adding the icons for each category.
 	********************************************************************************/
@@ -108,7 +89,6 @@ var ClockView = function(container,model){
 	waterContainer.append(waterIcon,waterLabel);
 	$(iconsContainer).append(waterContainer);
 	$(container).append(iconsContainer);
-	$(container).append(buttonGroup);
 
 	/********************************************************************************
 					   		  The calendarview is added
@@ -120,8 +100,8 @@ var ClockView = function(container,model){
 	/********************************************************************************
 							 Public variables and functions
 	********************************************************************************/
-	this.barButton 			= barButton;
-	this.bezierButton 		= bezierButton;
+	this.barClock = barClock;
+	this.bezierClock = bezierClock;
 
 	this.gasContainer 		= gasContainer;
 	this.elecContainer 		= elecContainer;

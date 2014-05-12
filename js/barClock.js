@@ -24,7 +24,6 @@ var BarClock = function(container, data, options){
 		mainColor				: "#E25942",
 		colors					: ["#E25942","#F6CB51","#13A89E"],
 		timeFontSize			: 55,
-		dateFontSize			: 35,
 
 	};
 
@@ -220,8 +219,7 @@ var BarClock = function(container, data, options){
 	var clockUpdate = function(){
 		if(dateBool){
 			var format = d3.time.format("%Y-%m-%d");
-			clockTime.text(format(selectedDate))
-			.style("font-size",o.dateFontSize+"px");
+			clockTime.text(format(selectedDate));
 		}
 		else{
 			var d = new Date(Date.now());
@@ -233,7 +231,6 @@ var BarClock = function(container, data, options){
 			// Also updating currentTime
 			currentTime = d.getHours();
 			clockTime.text(getTime())
-			.style("font-size",o.timeFontSize+"px");
 		}
 	}
 	setInterval(clockUpdate,1000)

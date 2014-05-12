@@ -14,7 +14,7 @@ var CalendarView = function(container,model,parent){
 		backgroundColor			: "#FFFFFF",
 		fontColor				: "#EFEFEF",
 		handColor				: "#E25942",
-		colors					: ["#ADD5F7","#7FB2F0","#4E7AC7","#35478C","#16193B"]
+		colors					: ["rgb(200,200,200)","rgb(150,150,150)","rgb(100,100,100)","rgb(50,50,50)","rgb(1,1,1)"]
 
 	};
 

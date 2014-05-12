@@ -42,23 +42,24 @@ var ClockController = function(view,model){
 
 	function hideAll(){
 		$("#barEnergyClock, #bezierEnergyClock").hide();
-		$(view.barButton).removeClass('active');
-		$(view.bezierButton).removeClass('active');
 	}
-	
 
-	view.barButton.click(function(){
+	$("#bezierEnergyClock").click(function(event) {
+
 		hideAll();
 		$(this).addClass("active");
 		$("#barEnergyClock").show();
 		$("#bezierEnergyClock").hide();
+
 	});
 
-	view.bezierButton.click(function(){
+	$("#barEnergyClock").click(function(){
 		hideAll();
+
 		$(this).addClass("active");
 		$("#barEnergyClock").hide();
 		$("#bezierEnergyClock").show();
+
 	});
 
 	hideAll();
