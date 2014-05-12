@@ -48,6 +48,9 @@ var ClockController = function(view,model){
 		var speed = 500;
 
 		if(!calendarBool){
+			 lineGraph3.attr("clip-path","");
+			 lineGraph2.attr("clip-path","");
+			 lineGraph1.attr("clip-path","");
 
 			calendarBool = true;
 			$("#calendar").animate({
@@ -57,6 +60,10 @@ var ClockController = function(view,model){
 			});
 		}
 		else{
+
+			 lineGraph3.attr("clip-path","url(#clipper)");
+			 lineGraph2.attr("clip-path","url(#clipper)");
+			 lineGraph1.attr("clip-path","url(#clipper)");
 
 			calendarBool = false;
 			$("#calendar").animate({

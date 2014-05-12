@@ -13,7 +13,7 @@ var BarClock = function(container, data, options){
 
 	var defaults = {
 
-		barHeight 				: 250,
+		barHeight 				: 150,
 		barWidth				: 10,
 		gap 					: 20,
 		centerRadius 			: 170,

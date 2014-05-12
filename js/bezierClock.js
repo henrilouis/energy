@@ -17,9 +17,9 @@ var BezierClock = function(container, data, options){
 
 	var defaults = {
 
-		barHeight 				: 250,
+		barHeight 				: 173,
 		barWidth				: 10,
-		gap 					: 20,
+		gap 					: -3,
 		centerRadius 			: 170,
 		centerWidth				: 15,
 		backgroundColor			: "#FFFFFF",
@@ -77,6 +77,7 @@ var BezierClock = function(container, data, options){
 	var maximum = d3.max(dataSum());
 	var circularAmount = 360/data[0][0].length;
 	var hournumber = parseInt(getTime().slice(0, -3));
+	var bezierOffset =o.gap+o.centerRadius+o.centerWidth;
 	
 	stack = d3.layout.stack().offset("zero");
 
@@ -153,7 +154,7 @@ var BezierClock = function(container, data, options){
           .attr("stroke-width", 3)
           .attr("clip-path", "url(#invertedclipper)")
           .style("opacity", 0.2)
-          .attr("fill", o.colors[2]);
+          .attr("fill", "grey");
 
         oldlineGraph2 = svg.append("path")
     	  .attr("id", "oldlineGraph")
@@ -162,7 +163,7 @@ var BezierClock = function(container, data, options){
           .attr("stroke-width", 3)
           .attr("clip-path", "url(#invertedclipper)")
           .style("opacity", 0.2)
-          .attr("fill", o.colors[1]);
+          .attr("fill", "grey");
 
     	oldlineGraph1 = svg.append("path")
     	  .attr("id", "oldlineGraph")
@@ -171,7 +172,7 @@ var BezierClock = function(container, data, options){
           .attr("stroke-width", 3)
           .attr("clip-path", "url(#invertedclipper)")
           .style("opacity", 0.2)
-          .attr("fill", o.colors[0]);
+          .attr("fill", "grey");
 		  
 		// current data:
 	    lineGraph3 = svg.append("path")
@@ -333,17 +334,17 @@ var BezierClock = function(container, data, options){
 				var circularCosValue = Math.cos(toRadians(circularAmount*[i]));
 
 				//current line data
-				lineData[0][i]= { "x": diameter/2+ circularSinValue*((data[0][0][i])								/maximum*o.barHeight+208),   "y":diameter/2 - circularCosValue*((data[0][0][i])								/maximum*o.barHeight+208)} ;
-				lineData[1][i]= { "x": diameter/2+ circularSinValue*((data[0][0][i]+data[0][1][i])					/maximum*o.barHeight+208),   "y":diameter/2 - circularCosValue*((data[0][0][i]+data[0][1][i])				/maximum*o.barHeight+208)} ;
-				lineData[2][i]= { "x": diameter/2+ circularSinValue*((data[0][0][i]+data[0][1][i]+data[0][2][i])	/maximum*o.barHeight+208),   "y":diameter/2 - circularCosValue*((data[0][0][i]+data[0][1][i]+data[0][2][i])	/maximum*o.barHeight+208)} ;
+				lineData[0][i]= { "x": diameter/2+ circularSinValue*((data[0][0][i])								/maximum*o.barHeight+bezierOffset),   "y":diameter/2 - circularCosValue*((data[0][0][i])								/maximum*o.barHeight+bezierOffset)} ;
+				lineData[1][i]= { "x": diameter/2+ circularSinValue*((data[0][0][i]+data[0][1][i])					/maximum*o.barHeight+bezierOffset),   "y":diameter/2 - circularCosValue*((data[0][0][i]+data[0][1][i])				/maximum*o.barHeight+bezierOffset)} ;
+				lineData[2][i]= { "x": diameter/2+ circularSinValue*((data[0][0][i]+data[0][1][i]+data[0][2][i])	/maximum*o.barHeight+bezierOffset),   "y":diameter/2 - circularCosValue*((data[0][0][i]+data[0][1][i]+data[0][2][i])	/maximum*o.barHeight+bezierOffset)} ;
 
 				//average line data (only for combined)
-				lineData[3][i]= { "x": diameter/2+ circularSinValue*((data[2][0][i]+data[2][1][i]+data[2][2][i])	/maximum*o.barHeight+208),   "y":diameter/2 - circularCosValue*((data[2][0][i]+data[2][1][i]+data[2][2][i])	/maximum*o.barHeight+208)} ;
+				lineData[3][i]= { "x": diameter/2+ circularSinValue*((data[2][0][i]+data[2][1][i]+data[2][2][i])	/maximum*o.barHeight+bezierOffset),   "y":diameter/2 - circularCosValue*((data[2][0][i]+data[2][1][i]+data[2][2][i])	/maximum*o.barHeight+bezierOffset)} ;
 				
 				//previous line data
-				oldlineData[0][i]= { "x": diameter/2+ circularSinValue*((data[2][0][i])								/maximum*o.barHeight+208),   "y":diameter/2 - circularCosValue*((data[1][0][i])								/maximum*o.barHeight+208)} ;
-				oldlineData[1][i]= { "x": diameter/2+ circularSinValue*((data[2][0][i]+data[2][1][i])				/maximum*o.barHeight+208),   "y":diameter/2 - circularCosValue*((data[1][0][i]+data[1][1][i])				/maximum*o.barHeight+208)} ;
-				oldlineData[2][i]= { "x": diameter/2+ circularSinValue*((data[2][0][i]+data[2][1][i]+data[2][2][i])	/maximum*o.barHeight+208),   "y":diameter/2 - circularCosValue*((data[1][0][i]+data[1][1][i]+data[1][2][i])	/maximum*o.barHeight+208)} ;
+				oldlineData[0][i]= { "x": diameter/2+ circularSinValue*((data[1][0][i])								/maximum*o.barHeight+bezierOffset),   "y":diameter/2 - circularCosValue*((data[1][0][i])								/maximum*o.barHeight+bezierOffset)} ;
+				oldlineData[1][i]= { "x": diameter/2+ circularSinValue*((data[1][0][i]+data[1][1][i])				/maximum*o.barHeight+bezierOffset),   "y":diameter/2 - circularCosValue*((data[1][0][i]+data[1][1][i])				/maximum*o.barHeight+bezierOffset)} ;
+				oldlineData[2][i]= { "x": diameter/2+ circularSinValue*((data[1][0][i]+data[1][1][i]+data[1][2][i])	/maximum*o.barHeight+bezierOffset),   "y":diameter/2 - circularCosValue*((data[1][0][i]+data[1][1][i]+data[1][2][i])	/maximum*o.barHeight+bezierOffset)} ;
 			}	
 
 			//data from previous day is startpoint for new day

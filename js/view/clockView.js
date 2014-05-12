@@ -21,9 +21,7 @@ var ClockView = function(container,model){
 
 	var options = {
 
-			barHeight 				: 150,
 			barWidth				: 10,
-			gap 					: 20,
 			centerRadius 			: 170,
 			centerWidth				: 15,
 			backgroundColor			: "#FFFFFF",
