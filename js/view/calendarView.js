@@ -1,4 +1,4 @@
-var CalendarView = function(container,model){
+var CalendarView = function(container,model,parent){
 
 	var data 					= [[1,2,3,4,5,6,7,8,9,8,7,6,5,4,3,2,1,2,3,4,5,6,7,8],
 								   [9,8,7,6,5,4,3,2,1,2,3,4,5,6,7,8,9,8,7,6,5,4,3,2]];
@@ -21,6 +21,8 @@ var CalendarView = function(container,model){
 	$(container).css('position','absolute');
 	$(container).css('margin-left',($('#barEnergyClock svg').width()/2) - (options.width/2));
 	$(container).css('margin-top',($('#barEnergyClock svg').height()/2) - 140);
+	$(container).css('overflow','hidden');
+	$(container).css('border-radius','50px');
 
 	model.addObserver(this);
 
@@ -42,14 +44,35 @@ var CalendarView = function(container,model){
 
 			$("#scrollCalendarContainer").scroll(function(event) {
 
+				var inner = $("#scrollCalendar").width()-($("#scrollCalendarContainer").innerWidth()/2)-(options.squareWidth+options.squarePadding*2+options.squareMargin*2)/2;
+
 				var workWidth = $("#scrollCalendarContainer").scrollLeft();
 				var selection = Math.round(workWidth / $('#scrollCalendar g').outerWidth(true));
 
-				//console.log(selection);
+				var calendarHeight = $("#calendar").height();
+
+				if(workWidth < inner){
+
+					lineGraph3.attr("clip-path","");
+					lineGraph2.attr("clip-path","");
+					lineGraph1.attr("clip-path","");
+
+					parent.barClock.dateToggle(true);
+					parent.bezierClock.dateToggle(true);
+				}
+				else{
+
+					lineGraph3.attr("clip-path","url(#clipper)");
+					lineGraph2.attr("clip-path","url(#clipper)");
+					lineGraph1.attr("clip-path","url(#clipper)");
+
+					parent.barClock.dateToggle(false);
+					parent.bezierClock.dateToggle(false);
+				}
 
 				model.setSelected(selection);
 			});
-			
+
 		}
 		
 	}

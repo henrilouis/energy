@@ -39,13 +39,8 @@ var BezierClock = function(container, data, options){
 				Public functions
 	*****************************************/
 	
-	var dateToggle = function(){
-		if(!dateBool){
-			dateBool = true;
-		}
-		else{
-			dateBool = false;
-		}
+	var dateToggle = function(value){
+		dateBool = value;
 		clockUpdate();
 	}
 
@@ -247,7 +242,7 @@ var BezierClock = function(container, data, options){
 	    clockTime = centerPiece.append( "text" )
 	    	.attr('class','clockTime')
 	    	.text(getTime())
-	    	.attr("dy", 18)
+	    	.attr("dy", 15)
 	    	.attr("text-anchor", "middle")
 	    	.style("font-size",o.timeFontSize+"px")
 	    	.style("fill",o.fontColor);

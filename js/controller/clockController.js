@@ -1,7 +1,5 @@
 var ClockController = function(view,model){
 
-	var calendarBool = false;
-
 	view.gasContainer.click(function(event) {
 
 		if($(this).hasClass('disabled')){
@@ -39,45 +37,6 @@ var ClockController = function(view,model){
 			$(this).find('path').attr('fill',"#ccc");
 			view.toggleWater();
 		}
-
-	});
-
-	$(".clockTime").click(function(event) {
-
-		var calendarHeight = $("#calendar").height();
-		var speed = 500;
-
-		if(!calendarBool){
-			 lineGraph3.attr("clip-path","");
-			 lineGraph2.attr("clip-path","");
-			 lineGraph1.attr("clip-path","");
-
-			calendarBool = true;
-			$("#calendar").animate({
-				bottom: 0,
-				},speed, function() {
-				/* stuff to do after animation is complete */
-			});
-		}
-		else{
-
-			 lineGraph3.attr("clip-path","url(#clipper)");
-			 lineGraph2.attr("clip-path","url(#clipper)");
-			 lineGraph1.attr("clip-path","url(#clipper)");
-
-			calendarBool = false;
-			$("#calendar").animate({
-				bottom: -calendarHeight,
-				},speed, function() {
-				/* stuff to do after animation is complete */
-			});
-
-			$("#scrollCalendarContainer").scrollLeft($("#scrollCalendar").width());
-			model.setLatestSelected();
-		}
-
-		view.barClock.dateToggle();
-		view.bezierClock.dateToggle();
 
 	});
 

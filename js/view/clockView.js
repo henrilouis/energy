@@ -111,6 +111,13 @@ var ClockView = function(container,model){
 	$(container).append(buttonGroup);
 
 	/********************************************************************************
+					   		  The calendarview is added
+	********************************************************************************/
+
+	var calendarView = new CalendarView("#calendar", model, this);
+	var calendarController = new CalendarController(calendarView,model);
+
+	/********************************************************************************
 							 Public variables and functions
 	********************************************************************************/
 	this.barButton 			= barButton;
@@ -191,8 +198,6 @@ var ClockView = function(container,model){
 
 		barClock.selectDate(model.getSelectedDate());
 		bezierClock.selectDate(model.getSelectedDate());
-
-		var d = new Date();
 
 		gasLabel.html("SEK "+Math.round(gasCount()));
 		elecLabel.html("SEK "+Math.round(elecCount()));

@@ -20,7 +20,7 @@ var ScrollCalendar = function(container, data, options, model){
 		fontColor				: "#EFEFEF",
 		handColor				: "#E25942",
 		colors					: ["#ADD5F7","#7FB2F0","#4E7AC7","#35478C","#16193B"]
-
+		
 	};
 
 	var options = $.extend(defaults,options);

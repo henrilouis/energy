@@ -117,5 +117,6 @@ var EnergyClockModel = function(){
 	    listeners.push(listener);
 	};
 
+	//createRandomData();
 	setTimeout(createRandomData,300);
 }
