@@ -98,7 +98,7 @@ textarea {
    ========================================================================== */
 
 #energyClock{
-    width:710px;
+    width:770px;
     margin:auto;
 }
 
@@ -131,13 +131,6 @@ textarea {
 .iconContainer.disabled .units{
     display:none;
 }
-
-#calendar{
-    
-    position:fixed;
-    bottom:0px;
-}
-
 
 /* ==========================================================================
    Helper classes

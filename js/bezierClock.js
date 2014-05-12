@@ -247,7 +247,7 @@ var BezierClock = function(container, data, options){
 	    clockTime = centerPiece.append( "text" )
 	    	.attr('class','clockTime')
 	    	.text(getTime())
-	    	.attr("dy", -35)
+	    	.attr("dy", 18)
 	    	.attr("text-anchor", "middle")
 	    	.style("font-size",o.timeFontSize+"px")
 	    	.style("fill",o.fontColor);

@@ -9,7 +9,8 @@ var ScrollCalendar = function(container, data, options, model){
 
 	var defaults = {
 
-		squareHeight			: 10,
+		width                   : 250,
+		squareHeight			: 3,
 		squareWidth				: 30,
 		squarePadding			: 0,
 		squareMargin			: 0,
@@ -35,7 +36,6 @@ var ScrollCalendar = function(container, data, options, model){
 	/*****************************************
 				Helper variables
 	*****************************************/
-	var wiWidth = $(window).innerWidth();
 
 	var max = d3.max(data.map(function(array) {
   		return d3.max(array);
@@ -60,14 +60,14 @@ var ScrollCalendar = function(container, data, options, model){
 			for(i=0;i<data.length-1;i++){
 				width += ( o.squareWidth + o.domainOffset + (o.squarePadding * 2) + (o.squareMargin * 2) );
 			}
-			width += (wiWidth/2)+((o.squareWidth+(o.squareMargin*2)+(o.squarePadding*2))/2)+o.domainOffset;
+			width += (o.width/2)+((o.squareWidth+(o.squareMargin*2)+(o.squarePadding*2))/2)+o.domainOffset;
 			return width+"px";
 		})
 		.style("height",function(){
 			return ( o.squareHeight + ( o.squarePadding*2) + ( o.squareMargin ) ) * data[0].length+"px";
 		})
 		.style("margin-left",function(){
-			return (wiWidth/2)-((o.squareWidth+(o.squareMargin*2)+(o.squarePadding*2))/2)-o.domainOffset+"px";
+			return (o.width/2)-((o.squareWidth+(o.squareMargin*2)+(o.squarePadding*2))/2)-o.domainOffset+"px";
 		});
 
 	scrollCalendar.append("div")
@@ -80,7 +80,7 @@ var ScrollCalendar = function(container, data, options, model){
 		})
 		.style('position','absolute')
 		.style('left',function(){
-			return (wiWidth/2)-((o.squareWidth+(o.squareMargin*2)+(o.squarePadding*2))/2)+"px";
+			return (o.width/2)-((o.squareWidth+(o.squareMargin*2)+(o.squarePadding*2))/2)+"px";
 		})
 		.style('border','thin solid black');
 
@@ -104,7 +104,7 @@ var ScrollCalendar = function(container, data, options, model){
 				.style("padding",o.squarePadding+"px")
 				.style("margin",o.squareMargin+"px");
 
-		$("#scrollCalendarContainer").css('width',wiWidth);
+		$("#scrollCalendarContainer").css('width',o.width);
 		$("#scrollCalendarContainer").scrollLeft($("#scrollCalendar").width());
 		
 	}
@@ -121,26 +121,10 @@ var ScrollCalendar = function(container, data, options, model){
 		$("#scrollCalendarContainer").css('overflow-x','scroll');
 	}
 
-	$("#scrollCalendarContainer").scroll(function(event) {
-
-		var workWidth = $("#scrollCalendarContainer").scrollLeft();
-		var selection = Math.round(workWidth / $('#scrollCalendar g').outerWidth(true));
-
-		console.log(selection);
-
-		model.setSelected(selection);
-		
-		
-	});
-
 	var update = function(){
 
 	}
 
 	drawCalendar();
-
-	// dirty stuff hiding the container
-	var calendarHeight = $("#calendar").height();
-	$("#calendar").css("bottom",-calendarHeight);
 
 }
