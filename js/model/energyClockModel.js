@@ -15,7 +15,7 @@ var EnergyClockModel = function(){
 	// get the number to calculate date from.. for now we use only days
 	var getSelectedDate = function(){
 		var d = new Date();
-		if(selectedNumber){
+		if(selectedNumber != null){
 			d.setDate(d.getDate()-data.length);
 			d.setDate(d.getDate()+selectedNumber+1);
 		}

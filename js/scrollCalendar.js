@@ -10,10 +10,10 @@ var ScrollCalendar = function(container, data, options, model){
 	var defaults = {
 
 		squareHeight			: 7,
-		squareWidth				: 30,
+		squareWidth				: 50,
 		squarePadding			: 0,
-		squareMargin			: 0,
-		domainOffset 			: 10,
+		squareMargin			: 1,
+		domainOffset 			: 0,
 		selectionPadding		: 10,
 		backgroundColor			: "#FFFFFF",
 		fontColor				: "#EFEFEF",
@@ -87,7 +87,7 @@ var ScrollCalendar = function(container, data, options, model){
 				.style("height",o.squareHeight+"px")
 				.style("padding",o.squarePadding+"px")
 				.style("margin",o.squareMargin+"px");
-		
+
 		$("#scrollCalendarContainer").css('width',$(window).innerWidth());
 		$("#scrollCalendarContainer").scrollLeft($("#scrollCalendar").width());
 		
@@ -106,14 +106,17 @@ var ScrollCalendar = function(container, data, options, model){
 	}
 
 	$("#scrollCalendarContainer").scroll(function(event) {
-		var workWidth = $("#scrollCalendarContainer").scrollLeft()-($(window).innerWidth());
-		var totalWidth = $("#scrollCalenar").width()-($(window).innerWidth());
-		var pos = workWidth - totalWidth;
-		var selection = Math.round(pos / $('#scrollCalendar g').outerWidth(true))-1;
 
-		//console.log(selection);
-		if(selection>=0){
+		var workWidth = $("#scrollCalendarContainer").scrollLeft();
+		var selection = Math.floor(workWidth / $('#scrollCalendar g').outerWidth(true));
+
+		console.log(selection);
+		
+		if(selection<data.length){
 			model.setSelected(selection);
+		}
+		else{
+			model.setSelected(selection-1);
 		}
 		
 	});
