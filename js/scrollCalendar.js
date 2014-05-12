@@ -9,11 +9,11 @@ var ScrollCalendar = function(container, data, options, model){
 
 	var defaults = {
 
-		squareHeight			: 7,
-		squareWidth				: 50,
+		squareHeight			: 10,
+		squareWidth				: 30,
 		squarePadding			: 0,
-		squareMargin			: 1,
-		domainOffset 			: 0,
+		squareMargin			: 0,
+		domainOffset 			: 10,
 		selectionPadding		: 10,
 		backgroundColor			: "#FFFFFF",
 		fontColor				: "#EFEFEF",
@@ -35,6 +35,8 @@ var ScrollCalendar = function(container, data, options, model){
 	/*****************************************
 				Helper variables
 	*****************************************/
+	var wiWidth = $(window).innerWidth();
+
 	var max = d3.max(data.map(function(array) {
   		return d3.max(array);
 	}));
@@ -55,18 +57,32 @@ var ScrollCalendar = function(container, data, options, model){
 		.attr('id','scrollCalendar')
 		.style("width",function(){
 			width = 0;
-			for(i=0;i<data.length;i++){
+			for(i=0;i<data.length-1;i++){
 				width += ( o.squareWidth + o.domainOffset + (o.squarePadding * 2) + (o.squareMargin * 2) );
 			}
-			width += $(window).innerWidth()/2;
+			width += (wiWidth/2)+((o.squareWidth+(o.squareMargin*2)+(o.squarePadding*2))/2)+o.domainOffset;
 			return width+"px";
 		})
 		.style("height",function(){
 			return ( o.squareHeight + ( o.squarePadding*2) + ( o.squareMargin ) ) * data[0].length+"px";
 		})
 		.style("margin-left",function(){
-			return $(window).innerWidth()/2+"px";
+			return (wiWidth/2)-((o.squareWidth+(o.squareMargin*2)+(o.squarePadding*2))/2)-o.domainOffset+"px";
 		});
+
+	scrollCalendar.append("div")
+		.attr('id','selector')
+		.style("width",function(){
+			return o.squareWidth+(o.squareMargin*2)+(o.squarePadding*2)+"px";
+		})
+		.style("height",function(){
+			return (o.squareHeight+o.squareMargin+o.squarePadding*2)*data[0].length+"px";
+		})
+		.style('position','absolute')
+		.style('left',function(){
+			return (wiWidth/2)-((o.squareWidth+(o.squareMargin*2)+(o.squarePadding*2))/2)+"px";
+		})
+		.style('border','thin solid black');
 
 	var drawCalendar = function(){
 
@@ -88,7 +104,7 @@ var ScrollCalendar = function(container, data, options, model){
 				.style("padding",o.squarePadding+"px")
 				.style("margin",o.squareMargin+"px");
 
-		$("#scrollCalendarContainer").css('width',$(window).innerWidth());
+		$("#scrollCalendarContainer").css('width',wiWidth);
 		$("#scrollCalendarContainer").scrollLeft($("#scrollCalendar").width());
 		
 	}
@@ -108,16 +124,12 @@ var ScrollCalendar = function(container, data, options, model){
 	$("#scrollCalendarContainer").scroll(function(event) {
 
 		var workWidth = $("#scrollCalendarContainer").scrollLeft();
-		var selection = Math.floor(workWidth / $('#scrollCalendar g').outerWidth(true));
+		var selection = Math.round(workWidth / $('#scrollCalendar g').outerWidth(true));
 
 		console.log(selection);
+
+		model.setSelected(selection);
 		
-		if(selection<data.length){
-			model.setSelected(selection);
-		}
-		else{
-			model.setSelected(selection-1);
-		}
 		
 	});
 
