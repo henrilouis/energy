@@ -22,7 +22,12 @@ var CalendarView = function(container,model,parent){
 	$(container).css('margin-left',($('#barEnergyClock svg').width()/2) - (options.width/2));
 	$(container).css('margin-top',($('#barEnergyClock svg').height()/2) - 140);
 	$(container).css('overflow','hidden');
-	$(container).css('border-radius','50px');
+	if (navigator.userAgent.match(/(iPod|iPhone|iPad)/)) {
+
+	}else{
+		$(container).css('border-radius','50px');
+	}
+	
 
 	model.addObserver(this);
 
