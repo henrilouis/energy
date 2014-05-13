@@ -61,11 +61,41 @@ var EnergyClockModel = function(){
 								data[i][j][k].push(0);
 							}
 							else{
-								data[i][j][k].push(Math.random()*10);
+
+								if(l<6){
+									data[i][j][k].push((Math.random()*2)+1);
+								}
+								else if(l > 5 && l < 9){
+									data[i][j][k].push((Math.random()*10)+1);
+								}
+								else if(l > 8 && l < 18){
+									data[i][j][k].push((Math.random()*4)+1);
+								}
+								else if(l > 17 && l < 22){
+									data[i][j][k].push((Math.random()*10)+1);
+								}
+								else if(l > 21 && l < 25){
+									data[i][j][k].push((Math.random()*8)+1);
+								}
+								
 							}
 						}
 						else{
-							data[i][j][k].push(Math.random()*10);
+								if(l<6){
+									data[i][j][k].push((Math.random()*2)+1);
+								}
+								else if(l > 5 && l < 9){
+									data[i][j][k].push((Math.random()*10)+1);
+								}
+								else if(l > 8 && l < 18){
+									data[i][j][k].push((Math.random()*4)+1);
+								}
+								else if(l > 17 && l < 22){
+									data[i][j][k].push((Math.random()*10)+1);
+								}
+								else if(l > 21 && l < 25){
+									data[i][j][k].push((Math.random()*8)+1);
+								}
 						}
 
 					}

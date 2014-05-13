@@ -95,31 +95,7 @@
 			"file": "index.html",
 			"settings":
 			{
-				"buffer_size": 2450,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "js/main.js",
-			"settings":
-			{
-				"buffer_size": 177,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "js/view/clockView.js",
-			"settings":
-			{
-				"buffer_size": 5625,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "js/controller/clockController.js",
-			"settings":
-			{
-				"buffer_size": 1490,
+				"buffer_size": 2499,
 				"line_ending": "Windows"
 			}
 		},
@@ -127,7 +103,23 @@
 			"file": "css/main.css",
 			"settings":
 			{
-				"buffer_size": 6202,
+				"buffer_size": 6223,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "js/view/clockView.js",
+			"settings":
+			{
+				"buffer_size": 5650,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "js/controller/clockController.js",
+			"settings":
+			{
+				"buffer_size": 2128,
 				"line_ending": "Windows"
 			}
 		},
@@ -135,7 +127,7 @@
 			"file": "js/scrollCalendar.js",
 			"settings":
 			{
-				"buffer_size": 3542,
+				"buffer_size": 3556,
 				"line_ending": "Windows"
 			}
 		},
@@ -143,7 +135,7 @@
 			"file": "js/view/calendarView.js",
 			"settings":
 			{
-				"buffer_size": 2304,
+				"buffer_size": 2661,
 				"line_ending": "Windows"
 			}
 		},
@@ -167,7 +159,7 @@
 			"file": "js/barClock.js",
 			"settings":
 			{
-				"buffer_size": 6736,
+				"buffer_size": 6737,
 				"line_ending": "Windows"
 			}
 		},
@@ -175,7 +167,7 @@
 			"file": "js/bezierClock.js",
 			"settings":
 			{
-				"buffer_size": 13483,
+				"buffer_size": 13484,
 				"line_ending": "Windows"
 			}
 		}
@@ -244,6 +236,7 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Henri/Dropbox/GitHub/energy/js/main.js",
 		"/C/Users/Henri/Dropbox/GitHub/energy/css/main.css",
 		"/C/Users/Henri/Dropbox/GitHub/energy/js/barClock.js",
 		"/C/Users/Henri/Dropbox/GitHub/energy/js/view/clockView.js",
@@ -302,6 +295,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"selector",
+			"15",
+			"ios",
 			"bezierClock",
 			"#calendar",
 			"clockUpdate",
@@ -426,10 +422,7 @@
 			"1995",
 			"195",
 			"jpg",
-			"world",
-			"disable_formatted_linebreak",
-			"  \n",
-			"------------------------------\n"
+			"world"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -447,7 +440,7 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 4,
 			"sheets":
 			[
 				{
@@ -456,15 +449,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2450,
+						"buffer_size": 2499,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1592,
-								1592
+								1641,
+								1641
 							]
 						],
 						"settings":
@@ -477,122 +470,27 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 236.0,
+						"translation.y": 40.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 9,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "js/main.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 177,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								171,
-								171
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "js/view/clockView.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 5625,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4156,
-								4156
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "js/controller/clockController.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1490,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1133,
-								1133
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 420.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
 					"file": "css/main.css",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6202,
+						"buffer_size": 6223,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2118,
-								2118
+								2139,
+								2139
 							]
 						],
 						"settings":
@@ -608,24 +506,24 @@
 						"translation.y": 1302.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
-					"file": "js/scrollCalendar.js",
+					"buffer": 2,
+					"file": "js/view/clockView.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3542,
+						"buffer_size": 5650,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2410,
-								2410
+								3676,
+								3684
 							]
 						],
 						"settings":
@@ -637,27 +535,91 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 286.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
-					"buffer": 6,
-					"file": "js/view/calendarView.js",
+					"buffer": 3,
+					"file": "js/controller/clockController.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2304,
+						"buffer_size": 2128,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								826,
-								826
+								1563,
+								1563
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 336.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "js/scrollCalendar.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3556,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2495,
+								2495
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 840.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "js/view/calendarView.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2661,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								705,
+								705
 							]
 						],
 						"settings":
@@ -668,14 +630,14 @@
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 336.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 6,
 					"file": "js/controller/calendarController.js",
 					"semi_transient": false,
 					"settings":
@@ -702,11 +664,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
-					"buffer": 8,
+					"buffer": 7,
 					"file": "js/model/energyClockModel.js",
 					"semi_transient": false,
 					"settings":
@@ -733,24 +695,24 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 10,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
-					"buffer": 9,
+					"buffer": 8,
 					"file": "js/barClock.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6736,
+						"buffer_size": 6737,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								759,
-								759
+								5170,
+								5170
 							]
 						],
 						"settings":
@@ -762,27 +724,27 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 122.0,
+						"translation.y": 2232.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 9,
+					"stack_index": 8,
 					"type": "text"
 				},
 				{
-					"buffer": 10,
+					"buffer": 9,
 					"file": "js/bezierClock.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 13483,
+						"buffer_size": 13484,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								42,
-								42
+								7811,
+								7811
 							]
 						],
 						"settings":
@@ -793,10 +755,10 @@
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1980.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
+					"stack_index": 7,
 					"type": "text"
 				}
 			]

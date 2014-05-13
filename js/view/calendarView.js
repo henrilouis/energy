@@ -22,14 +22,13 @@ var CalendarView = function(container,model,parent){
 	$(container).css('margin-left',($('#barEnergyClock svg').width()/2) - (options.width/2));
 	$(container).css('margin-top',($('#barEnergyClock svg').height()/2) - parent.options.centerRadius);
 	$(container).css('overflow','hidden');
-	if (navigator.userAgent.match(/(iPod|iPhone|iPad)/)) {
-		$(container).css('border-top-left-radius',options.width/2+"px");
-		$(container).css('border-top-right-radius',options.width/2+"px");
-	}else{
-		$(container).css('border-top-left-radius',options.width/2+"px");
-		$(container).css('border-top-right-radius',options.width/2+"px");
-	}
-	
+
+	// Sadly border radius makes the ipad version slow :(
+	$(container).css('border-top-left-radius',options.width/2+"px");
+	$(container).css('border-top-right-radius',options.width/2+"px");
+
+	//$("#scrollCalendarContainer").animate({scrollLeft: $("#scrollCalendar").width()},356000);
+	// nice scrolling script
 
 	model.addObserver(this);
 
@@ -79,6 +78,31 @@ var CalendarView = function(container,model,parent){
 
 				model.setSelected(selection);
 			});
+
+			$("#scrollCalendar").click(function(event) {
+
+
+			    $("html, body").bind("scroll mousedown DOMMouseScroll mousewheel keyup", function(){
+			        $("#scrollCalendarContainer").stop();
+			    });
+
+			    var animateScroll = function(){
+			    	
+			    	$("#scrollCalendarContainer").animate({
+			    		scrollLeft: $("#scrollCalendar").width()-options.width/2
+			    	},(((rawData.length+1)*1000) * (1-($("#scrollCalendarContainer").scrollLeft()/($("#scrollCalendar").width()-options.width/2))))
+			    	,'linear'
+			    	,function(){
+			        	$("#scrollCalendarContainer").scrollLeft(0);
+			        	animateScroll();
+			   		});
+
+			    }
+			    animateScroll();
+			    return false; 
+
+			});
+			
 
 		}
 		
