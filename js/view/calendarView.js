@@ -50,13 +50,14 @@ var CalendarView = function(container,model,parent){
 
 			$("#scrollCalendarContainer").scroll(function(event) {
 
-				var inner = $("#scrollCalendar").width()-($("#scrollCalendarContainer").innerWidth()/2)-(options.squareWidth+options.squarePadding*2+options.squareMargin*2)/2;
+				var inner = $("#scrollCalendar").width()-($("#scrollCalendarContainer").innerWidth()/2)-options.squareWidth;
 
 				var workWidth = $("#scrollCalendarContainer").scrollLeft();
 				var selection = Math.round(workWidth / $('#scrollCalendar g').outerWidth(true));
 
 				var calendarHeight = $("#calendar").height();
-
+				console.log("workWidth: "+workWidth);
+				console.log("inner: "+inner);
 				if(workWidth < inner){
 
 					lineGraph3.attr("clip-path","");

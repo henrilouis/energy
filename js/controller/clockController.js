@@ -46,17 +46,32 @@ var ClockController = function(view,model){
 		if(!calendarBool){
 			calendarBool = true;
 			$("#calendar").fadeIn();
-			d3.selectAll('.clockTime').transition()
+			if (navigator.userAgent.match(/(iPod|iPhone|iPad)/)) {
+				d3.selectAll('.clockTime').transition()
+				.attr('dy','35')
+				.style('font-size','30px');
+			}
+			else{
+				d3.selectAll('.clockTime').transition()
 				.attr('dy','45')
 				.style('font-size','30px');
+			}
 			$("#scrollCalendarContainer").scrollLeft($("#scrollCalendar").width());
 			
 		}
 		else{
 			calendarBool = false;
-			d3.selectAll('.clockTime').transition()
+			if (navigator.userAgent.match(/(iPod|iPhone|iPad)/)) {
+				d3.selectAll('.clockTime').transition()
 				.attr('dy','-15')
 				.style('font-size','55px');
+			}
+			else{
+				d3.selectAll('.clockTime').transition()
+				.attr('dy','-15')
+				.style('font-size','55px');
+			}
+			
 			$("#calendar").fadeOut();
 			$("#scrollCalendarContainer").scrollLeft($("#scrollCalendar").width());
 		}
