@@ -4,28 +4,30 @@ var CalendarView = function(container,model,parent){
 								   [9,8,7,6,5,4,3,2,1,2,3,4,5,6,7,8,9,8,7,6,5,4,3,2]];
 	var options 				= {
 
-		width                   : 225,
-		squareHeight			: 3,
-		squareWidth				: 3,
+		width                   : 400,
+		squareHeight			: 7,
+		squareWidth				: 7,
 		squarePadding			: 0,
-		squareMargin			: 0,
+		squareMargin			: 1,
 		domainOffset 			: 0,
 		selectionPadding		: 10,
 		backgroundColor			: "#FFFFFF",
 		fontColor				: "#EFEFEF",
 		handColor				: "#E25942",
-		colors					: ["rgb(200,200,200)","rgb(150,150,150)","rgb(100,100,100)","rgb(50,50,50)","rgb(1,1,1)"]
+		colors					: ["rgba(226, 89, 66, 0.2)","rgba(226, 89, 66, 0.4)","rgba(226, 89, 66, 0.6)","rgba(226, 89, 66, 0.8)","rgba(226, 89, 66, 1)"]
 
 	};
 
 	$(container).css('position','absolute');
 	$(container).css('margin-left',($('#barEnergyClock svg').width()/2) - (options.width/2));
-	$(container).css('margin-top',($('#barEnergyClock svg').height()/2) - 140);
+	$(container).css('margin-top',($('#barEnergyClock svg').height()/2) - parent.options.centerRadius);
 	$(container).css('overflow','hidden');
 	if (navigator.userAgent.match(/(iPod|iPhone|iPad)/)) {
-
+		$(container).css('border-top-left-radius',options.width/2+"px");
+		$(container).css('border-top-right-radius',options.width/2+"px");
 	}else{
-		$(container).css('border-radius','50px');
+		$(container).css('border-top-left-radius',options.width/2+"px");
+		$(container).css('border-top-right-radius',options.width/2+"px");
 	}
 	
 

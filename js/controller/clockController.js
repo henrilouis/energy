@@ -1,5 +1,7 @@
 var ClockController = function(view,model){
 
+	var calendarBool = false;
+
 	view.gasContainer.click(function(event) {
 
 		if($(this).hasClass('disabled')){
@@ -40,11 +42,31 @@ var ClockController = function(view,model){
 
 	});
 
+	$(".clockTime").click(function(event) {
+		if(!calendarBool){
+			calendarBool = true;
+			$("#calendar").fadeIn();
+			d3.selectAll('.clockTime').transition()
+				.attr('dy','45')
+				.style('font-size','30px');
+			$("#scrollCalendarContainer").scrollLeft($("#scrollCalendar").width());
+			
+		}
+		else{
+			calendarBool = false;
+			d3.selectAll('.clockTime').transition()
+				.attr('dy','-15')
+				.style('font-size','55px');
+			$("#calendar").fadeOut();
+			$("#scrollCalendarContainer").scrollLeft($("#scrollCalendar").width());
+		}
+	});
+
 	function hideAll(){
 		$("#barEnergyClock, #bezierEnergyClock").hide();
 	}
 
-	$("#bezierEnergyClock").click(function(event) {
+	$("#bezierEnergyClock path").click(function(event) {
 
 		hideAll();
 		$(this).addClass("active");
@@ -53,7 +75,7 @@ var ClockController = function(view,model){
 
 	});
 
-	$("#barEnergyClock").click(function(){
+	$("#barEnergyClock rect").click(function(){
 		hideAll();
 
 		$(this).addClass("active");
@@ -63,6 +85,8 @@ var ClockController = function(view,model){
 	});
 
 	hideAll();
+	$("#calendar").hide();
+	$("#calendar").css("display","none");
 	$("#barEnergyClock").show();
 	$(view.barButton).addClass("active");
 	

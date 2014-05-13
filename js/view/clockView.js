@@ -32,7 +32,9 @@ var ClockView = function(container,model){
 			timeFontSize			: 55,
 
 		}
-	
+
+	this.options = options;
+
 	var barClock = new BarClock(container, data, options);
 	var bezierClock = new BezierClock(container, data, options);
 	

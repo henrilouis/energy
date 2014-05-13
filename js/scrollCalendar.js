@@ -70,7 +70,7 @@ var ScrollCalendar = function(container, data, options, model){
 			return (o.width/2)-((o.squareWidth+(o.squareMargin*2)+(o.squarePadding*2))/2)-o.domainOffset+"px";
 		});
 
-	scrollCalendar.append("div")
+	var selector = scrollCalendar.append("div")
 		.attr('id','selector')
 		.style("width",function(){
 			return o.squareWidth+(o.squareMargin*2)+(o.squarePadding*2)+"px";
@@ -82,7 +82,7 @@ var ScrollCalendar = function(container, data, options, model){
 		.style('left',function(){
 			return (o.width/2)-((o.squareWidth+(o.squareMargin*2)+(o.squarePadding*2))/2)+"px";
 		})
-		.style('border','thin solid white');
+		.style('border','thin solid #555');
 
 	var drawCalendar = function(){
 
