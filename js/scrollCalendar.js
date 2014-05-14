@@ -87,8 +87,6 @@ var ScrollCalendar = function(container, options, model){
 			})
 			.style('border','thin solid #555');
 
-	
-
 		days = d3.select("#scrollCalendar")
 			.selectAll("g")
 			.data(data)

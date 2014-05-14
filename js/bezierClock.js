@@ -4,6 +4,7 @@ var BezierClock = function(container, data, options){
 	var currentTime 			= date.getHours();
 	var selectedDate;
 	var dateBool 				= false;
+	var nightMode 				= false;
 	var svg, barCharts, centerPiece, backgroundCircle, handArc, arcGradient, clockHand, clockTime, 
 		gasIcon, electricityIcon, waterIcon, gasMeter, electricityMeter, waterMeter;
 	var lineData = [[],[],[],[]];
@@ -27,6 +28,8 @@ var BezierClock = function(container, data, options){
 		handColor				: "#E25942",
 		mainColor				: "#E25942",
 		colors					: ["#E25942","#F6CB51","#13A89E"],
+		nightBackgroundColor    : '#222222',
+		nightFontColor			: '#EFEFEF',
 		timeFontSize			: 55,
 
 	};
@@ -48,10 +51,27 @@ var BezierClock = function(container, data, options){
 		clockUpdate();
 	}
 
+	var toggleNightMode = function(){
+		
+		if(nightMode){
+			energyClock.style('background',o.backgroundColor);
+			backgroundCircle.style("fill",o.backgroundColor);
+			clockTime.style('fill',o.fontColor);
+			nightMode = false;
+		}else{
+			energyClock.style('background',o.nightBackgroundColor);
+			backgroundCircle.style("fill",o.nightBackgroundColor);
+			clockTime.style('fill',o.nightFontColor);
+			nightMode = true;
+		}
+
+	}
+
 	this.drawClock 				= drawClock;
 	this.update 				= update;
 	this.dateToggle				= dateToggle;
 	this.selectDate				= selectDate;
+	this.toggleNightMode		= toggleNightMode;
 
 	/*****************************************
 				Helper variables

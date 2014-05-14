@@ -1,6 +1,11 @@
 var ClockController = function(view,model){
 
 	var calendarBool = false;
+	var dayBool 	 = true;
+
+	/********************************************************************************
+					 Enabling / Disabling the different categories
+	********************************************************************************/
 
 	view.gasContainer.click(function(event) {
 
@@ -42,6 +47,10 @@ var ClockController = function(view,model){
 
 	});
 
+	/********************************************************************************
+					   	   For showing and hiding the calendar
+	********************************************************************************/
+
 	$(".clockTime").click(function(event) {
 		if(!calendarBool){
 			calendarBool = true;
@@ -77,6 +86,10 @@ var ClockController = function(view,model){
 		}
 	});
 
+	/********************************************************************************
+					 Switching between the bar and bezier views
+	********************************************************************************/
+
 	function hideAll(){
 		$("#barEnergyClock, #bezierEnergyClock").hide();
 	}
@@ -91,8 +104,8 @@ var ClockController = function(view,model){
 	});
 
 	$("#barEnergyClock rect").click(function(){
-		hideAll();
 
+		hideAll();
 		$(this).addClass("active");
 		$("#barEnergyClock").hide();
 		$("#bezierEnergyClock").show();
@@ -104,5 +117,26 @@ var ClockController = function(view,model){
 	$("#calendar").css("display","none");
 	$("#barEnergyClock").show();
 	$(view.barButton).addClass("active");
+
+	/********************************************************************************
+					 	Switching between night and day mode
+	********************************************************************************/
+
+	view.graphicSwitch.click(function(event) {
+		if(dayBool){
+			$(view.dayIcon).show();
+			$(view.nightIcon).hide();
+			$('body').css('background-color','#222222');
+			dayBool = false;
+		}
+		else{
+			$(view.nightIcon).show();
+			$(view.dayIcon).hide();
+			$('body').css('background-color','#FFFFFF');
+			dayBool = true;
+		}
+		view.barClock.toggleNightMode();
+		view.bezierClock.toggleNightMode();
+	});
 	
 }

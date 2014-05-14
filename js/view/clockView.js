@@ -93,6 +93,24 @@ var ClockView = function(container,model){
 	$(container).append(iconsContainer);
 
 	/********************************************************************************
+					   	   Adding the icons for night/day
+	********************************************************************************/
+	var graphicSwitch = $("<div id='graphicSwitch'>");
+		graphicSwitch.css('margin-left',$(iconsContainer).width()/2-9);
+		graphicSwitch.css('margin-top','103px');
+		graphicSwitch.css('position','relative');
+		graphicSwitch.css('cursor','pointer');
+
+	var dayIcon = $('<svg width="17" height="16.5"><circle stroke="'+options.colors[1]+'" fill="'+options.colors[1]+'" stroke-miterlimit="10" cx="8.75" cy="8.25" r="3.125"/><line fill="none" stroke="'+options.colors[1]+'" stroke-miterlimit="10" x1="8.75" y1="3.875" x2="8.75" y2="1"/><line fill="none" stroke="'+options.colors[1]+'" stroke-miterlimit="10" x1="6.562" y1="4.462" x2="5.56" y2="2.725"/><line fill="none" stroke="'+options.colors[1]+'" stroke-miterlimit="10" x1="4.375" y1="8.251" x2="2.37" y2="8.25"/><line fill="none" stroke="'+options.colors[1]+'" stroke-miterlimit="10" x1="6.564" y1="12.039" x2="5.56" y2="13.775"/><line fill="none" stroke="'+options.colors[1]+'" stroke-miterlimit="10" x1="10.938" y1="12.038" x2="11.94" y2="13.775"/><line fill="none" stroke="'+options.colors[1]+'" stroke-miterlimit="10" x1="13.125" y1="8.249" x2="15.129" y2="8.25"/><line fill="none" stroke="'+options.colors[1]+'" stroke-miterlimit="10" x1="10.936" y1="4.461" x2="11.94" y2="2.725"/><line fill="none" stroke="'+options.colors[1]+'" stroke-miterlimit="10" x1="4.961" y1="6.063" x2="2.472" y2="4.625"/><line fill="none" stroke="'+options.colors[1]+'" stroke-miterlimit="10" x1="4.962" y1="10.437" x2="2.472" y2="11.875"/><line fill="none" stroke="'+options.colors[1]+'" stroke-miterlimit="10" x1="8.751" y1="12.624" x2="8.75" y2="15.499"/><line fill="none" stroke="'+options.colors[1]+'" stroke-miterlimit="10" x1="12.539" y1="10.437" x2="15.028" y2="11.874"/><line fill="none" stroke="'+options.colors[1]+'" stroke-miterlimit="10" x1="12.539" y1="6.062" x2="15.028" y2="4.625"/>');
+		dayIcon.hide();
+	var nightIcon = $('<svg width="17" height="16.5"><path fill="#000000" stroke="#000000" stroke-miterlimit="10" d="M8.32,2.794c0.198,0.797,0.315,1.625,0.315,2.483c0,3.206-1.469,6.067-3.77,7.952c0.687,0.306,1.444,0.479,2.244,0.479c3.052,0,5.526-2.474,5.526-5.526C12.635,5.547,10.789,3.347,8.32,2.794z"/>')
+		
+	graphicSwitch.append(dayIcon);
+	graphicSwitch.append(nightIcon);
+	$(iconsContainer).append(graphicSwitch);
+
+
+	/********************************************************************************
 					   		  The calendarview is added
 	********************************************************************************/
 
@@ -108,6 +126,10 @@ var ClockView = function(container,model){
 	this.gasContainer 		= gasContainer;
 	this.elecContainer 		= elecContainer;
 	this.waterContainer 	= waterContainer;
+
+	this.graphicSwitch 		= graphicSwitch;
+	this.dayIcon			= dayIcon;
+	this.nightIcon			= nightIcon;
 
 	this.gasIcon 			= gasIcon;
 	this.elecIcon 			= elecIcon;
