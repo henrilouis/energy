@@ -48,59 +48,85 @@ var EnergyClockModel = function(){
 
 	var createRandomData = function(){
 		data = [];
-		for(i=0; i<356; i++){
-			data.push([]);
-			for(j=0; j<3; j++){
-				data[i].push([]);
-				for(k=0; k<3; k++){
-					data[i][j].push([]);
-					for(l=0; l<24; l++){
-						if(i == 355){
-							var date = new Date();
-							if(l>date.getHours() && j==0){
-								data[i][j][k].push(0);
+		var	gasAddition = 0;
+		var	electrictyAddition = 0;
+		var	waterAddition = 0;
+		var	morningAddition = 0;
+		var	middayAddition = 0;
+		var	eveningAddition = 0;
+		var nightAddition = 0;
+		for(i=0; i<52; i++){
+			data.push([],[],[],[],[],[],[]);
+			//weekdays:
+			for(x=0; x<7; x++){
+
+				if(x<5){
+					nightAddition = 0;
+					morningAddition = 0;
+					middayAddition = 0;
+					eveningAddition = 0;
+				}
+				else{
+					morningAddition = -5;
+					middayAddition = 5;
+					eveningAddition = 5;
+					nightAddition = 3;
+				}
+
+					for(j=0; j<3; j++){
+					data[i*7+x].push([]);
+					for(k=0; k<3; k++){
+						data[i*7+x][j].push([]);
+						for(l=0; l<24; l++){
+							if(i == 355){
+								var date = new Date();
+								if(l>date.getHours() && j==0){
+									data[i*7+x][j][k].push(0);
+								}
+								else{
+
+									if(l<6){
+										data[i*7+x][j][k].push((Math.random()*(3+nightAddition)));
+									}
+									else if(l > 5 && l < 9){
+										data[i*7+x][j][k].push((Math.random()*(10+morningAddition))+1);
+									}
+									else if(l > 8 && l < 18){
+										data[i*7+x][j][k].push((Math.random()*(4+middayAddition))+1);
+									}
+									else if(l > 17 && l < 22){
+										data[i*7+x][j][k].push((Math.random()*(10+eveningAddition))+1);
+									}
+									else if(l > 21 && l < 25){
+										data[i*7+x][j][k].push((Math.random()*(8+eveningAddition))+1);
+									}
+									
+								}
 							}
 							else{
-
-								if(l<6){
-									data[i][j][k].push((Math.random()*2)+1);
-								}
-								else if(l > 5 && l < 9){
-									data[i][j][k].push((Math.random()*10)+1);
-								}
-								else if(l > 8 && l < 18){
-									data[i][j][k].push((Math.random()*4)+1);
-								}
-								else if(l > 17 && l < 22){
-									data[i][j][k].push((Math.random()*10)+1);
-								}
-								else if(l > 21 && l < 25){
-									data[i][j][k].push((Math.random()*8)+1);
-								}
-								
+									if(l<6){
+										data[i*7+x][j][k].push((Math.random()*(3+nightAddition)));
+									}
+									else if(l > 5 && l < 9){
+										data[i*7+x][j][k].push((Math.random()*(10+morningAddition))+1);
+									}
+									else if(l > 8 && l < 18){
+										data[i*7+x][j][k].push((Math.random()*(4+middayAddition))+1);
+									}
+									else if(l > 17 && l < 22){
+										data[i*7+x][j][k].push((Math.random()*(10+eveningAddition))+1);
+									}
+									else if(l > 21 && l < 25){
+										data[i*7+x][j][k].push((Math.random()*(8+eveningAddition))+1);
+									}
 							}
-						}
-						else{
-								if(l<6){
-									data[i][j][k].push((Math.random()*2)+1);
-								}
-								else if(l > 5 && l < 9){
-									data[i][j][k].push((Math.random()*10)+1);
-								}
-								else if(l > 8 && l < 18){
-									data[i][j][k].push((Math.random()*4)+1);
-								}
-								else if(l > 17 && l < 22){
-									data[i][j][k].push((Math.random()*10)+1);
-								}
-								else if(l > 21 && l < 25){
-									data[i][j][k].push((Math.random()*8)+1);
-								}
-						}
 
+						}
 					}
 				}
 			}
+
+			
 		}
 		setLatestSelected();
 		notifyObservers("init");
