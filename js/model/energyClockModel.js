@@ -107,7 +107,7 @@ var EnergyClockModel = function(){
 	}
 
 	var resendData = function(){
-		notifyObservers();
+		notifyObservers("resend");
 	}
 
 	this.resendData = resendData;
@@ -147,6 +147,6 @@ var EnergyClockModel = function(){
 	    listeners.push(listener);
 	};
 
-	//createRandomData();
+	createRandomData();
 	setTimeout(createRandomData,300);
 }

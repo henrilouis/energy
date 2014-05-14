@@ -1,7 +1,8 @@
-var ScrollCalendar = function(container, data, options, model){
+var ScrollCalendar = function(container, options, model){
 
 	var date 					= new Date();
 	var currentTime 			= date.getHours();
+	var scrollCalendarContainer, scrollCalendar, selector, days, items;
 
 	/*****************************************		
 					Options
@@ -23,23 +24,17 @@ var ScrollCalendar = function(container, data, options, model){
 
 	};
 
+	var data;
+
 	var options = $.extend(defaults,options);
 	var o = options;
 	var width;
 
 	/*****************************************
-				Public functions
-	*****************************************/
-
-	this.update 				= update;
-
-	/*****************************************
 				Helper variables
 	*****************************************/
 
-	var max = d3.max(data.map(function(array) {
-  		return d3.max(array);
-	}));
+	var max;
 
 	var getColor = function(value){
 		var colorNumber = Math.round((value / max) * o.colors.length);
@@ -50,50 +45,58 @@ var ScrollCalendar = function(container, data, options, model){
 			  Creating the calendar
 	*****************************************/
 
-	var scrollCalendarContainer = d3.select(container).append("div")
-		.attr('id','scrollCalendarContainer');
+	var drawCalendar = function(value){
 
-	var scrollCalendar = scrollCalendarContainer.append("div")
-		.attr('id','scrollCalendar')
-		.style("width",function(){
-			width = 0;
-			for(i=0;i<data.length-1;i++){
-				width += ( o.squareWidth + o.domainOffset + (o.squarePadding * 2) + (o.squareMargin * 2) );
-			}
-			width += (o.width/2)+((o.squareWidth+(o.squareMargin*2)+(o.squarePadding*2))/2)+o.domainOffset;
-			return width+"px";
-		})
-		.style("height",function(){
-			return ( o.squareHeight + ( o.squarePadding*2) + ( o.squareMargin ) ) * data[0].length+"px";
-		})
-		.style("margin-left",function(){
-			return (o.width/2)-((o.squareWidth+(o.squareMargin*2)+(o.squarePadding*2))/2)-o.domainOffset+"px";
-		});
+		data = value;
 
-	var selector = scrollCalendar.append("div")
-		.attr('id','selector')
-		.style("width",function(){
-			return o.squareWidth+(o.squareMargin*2)+(o.squarePadding*2)+"px";
-		})
-		.style("height",function(){
-			return (o.squareHeight+o.squareMargin+o.squarePadding*2)*data[0].length+"px";
-		})
-		.style('position','absolute')
-		.style('left',function(){
-			return (o.width/2)-((o.squareWidth+(o.squareMargin*2)+(o.squarePadding*2))/2)+"px";
-		})
-		.style('border','thin solid #555');
+		max = d3.max(data.map(function(array) {
+  		return d3.max(array);
+		}));
 
-	var drawCalendar = function(){
+		scrollCalendarContainer = d3.select(container).append("div")
+			.attr('id','scrollCalendarContainer');
 
-		var days = d3.select("#scrollCalendar")
+		scrollCalendar = scrollCalendarContainer.append("div")
+			.attr('id','scrollCalendar')
+			.style("width",function(){
+				width = 0;
+				for(i=0;i<data.length-1;i++){
+					width += ( o.squareWidth + o.domainOffset + (o.squarePadding * 2) + (o.squareMargin * 2) );
+				}
+				width += (o.width/2)+((o.squareWidth+(o.squareMargin*2)+(o.squarePadding*2))/2)+o.domainOffset;
+				return width+"px";
+			})
+			.style("height",function(){
+				return ( o.squareHeight + ( o.squarePadding*2) + ( o.squareMargin ) ) * data[0].length+"px";
+			})
+			.style("margin-left",function(){
+				return (o.width/2)-((o.squareWidth+(o.squareMargin*2)+(o.squarePadding*2))/2)-o.domainOffset+"px";
+			});
+
+		selector = scrollCalendar.append("div")
+			.attr('id','selector')
+			.style("width",function(){
+				return o.squareWidth+(o.squareMargin*2)+(o.squarePadding*2)+"px";
+			})
+			.style("height",function(){
+				return (o.squareHeight+o.squareMargin+o.squarePadding*2)*data[0].length+"px";
+			})
+			.style('position','absolute')
+			.style('left',function(){
+				return (o.width/2)-((o.squareWidth+(o.squareMargin*2)+(o.squarePadding*2))/2)+"px";
+			})
+			.style('border','thin solid #555');
+
+	
+
+		days = d3.select("#scrollCalendar")
 			.selectAll("g")
 			.data(data)
 			.enter().append("g")
 				.style("float","left")
 				.style("margin-left",o.domainOffset+"px");
 		
-		var items = days.selectAll("div")
+		items = days.selectAll("div")
 			.data(function(d,i){return d;})
 			.enter().append("div")
 				.style("background-color",function(d,i){
@@ -106,25 +109,42 @@ var ScrollCalendar = function(container, data, options, model){
 
 		$("#scrollCalendarContainer").css('width',o.width);
 		$("#scrollCalendarContainer").scrollLeft($("#scrollCalendar").width());
+		if (navigator.userAgent.match(/(iPod|iPhone|iPad)/)) {
+			$("#scrollCalendarContainer").css('overflow','scroll');
+		}
+		else{
+			$("#scrollCalendarContainer").css('overflow-x','scroll');
+		}
+	}
+
+	/*****************************************
+			  Update function
+	*****************************************/
+	
+	var update = function(value){
+		
+		data = value;
+		
+		max = d3.max(data.map(function(array) {
+  			return d3.max(array);
+		}));
+
+		d3.select("#scrollCalendar")
+			.selectAll('g')
+			.data(data)
+			.selectAll("div")
+			.data(function(d,i){return d;})
+			.transition()
+				.style("background-color",function(d,i){
+					return getColor(d);
+				});
 		
 	}
 
 	/*****************************************
-			  Scrolling using jQuery
-			  functions
+				Public functions
 	*****************************************/
-	
-	if (navigator.userAgent.match(/(iPod|iPhone|iPad)/)) {
-		$("#scrollCalendarContainer").css('overflow','scroll');
-	}
-	else{
-		$("#scrollCalendarContainer").css('overflow-x','scroll');
-	}
 
-	var update = function(){
-
-	}
-
-	drawCalendar();
-
+	this.drawCalendar 			= drawCalendar;
+	this.update 				= update;
 }
