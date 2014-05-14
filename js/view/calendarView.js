@@ -36,7 +36,7 @@ var CalendarView = function(container,model,parent){
 		var gas = !$(".gasContainer").hasClass('disabled');
 		var elec = !$(".elecContainer").hasClass('disabled');
 		var water = !$(".waterContainer").hasClass('disabled');
-
+		
 		data.length = 0;
 		var rawData = value;
 		for(var i=0; i<rawData.length; i++){
