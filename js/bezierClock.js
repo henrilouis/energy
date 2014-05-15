@@ -56,12 +56,14 @@ var BezierClock = function(container, data, options){
 		if(nightMode){
 			energyClock.style('background',o.backgroundColor);
 			backgroundCircle.style("fill",o.backgroundColor);
+			clockHand.style('fill',o.backgroundColor);
 			clockTime.style('fill',o.fontColor);
 			nightMode = false;
 		}else{
 			energyClock.style('background',o.nightBackgroundColor);
 			backgroundCircle.style("fill",o.nightBackgroundColor);
 			clockTime.style('fill',o.nightFontColor);
+			clockHand.style('fill',o.nightBackgroundColor);
 			nightMode = true;
 		}
 
@@ -229,7 +231,7 @@ var BezierClock = function(container, data, options){
 			.attr( 'transform' , 'translate('+( diameter/2 )+','+( diameter/2 )+')');
 		
 		backgroundCircle = centerPiece.append( 'circle' )
-			.attr( "r", o.centerRadius+o.centerWidth+o.gap+2)
+			.attr( "r", o.centerRadius+o.centerWidth+o.gap+4)
 			.style("fill",o.backgroundColor);
 
 		handArc = d3.svg.arc()
@@ -252,11 +254,11 @@ var BezierClock = function(container, data, options){
 			.attr("fill", function(d, i) { return "url(#grad1)"});
 			
 		clockHand = centerPiece.append( "path" )
-			.attr( 'transform' , 'rotate('+scaleCalc( currentTime )+') translate(0,'+ -( o.centerRadius+o.centerWidth+11 ) +') scale(4)')
+			.attr( 'transform' , 'rotate('+scaleCalc( currentTime )+') translate(0,'+ -( o.centerRadius+o.centerWidth+12 ) +') scale(4)')
 			.attr('d', function() {
 		        return 'M ' + 0 +' '+ 0 + ' l 4 3 l -8 0 z';
 	      	})
-	      	.style( 'fill',o.handColor );
+	      	.style( 'fill',o.backgroundColor );
 
 	    clockTime = centerPiece.append( "text" )
 	    	.attr('class','clockTime')
@@ -299,12 +301,23 @@ var BezierClock = function(container, data, options){
 		  	.attr("d", lineFunctionLinear(clipMaskInverted));
   	
         //kan effiecienter maar kreeg het niet lekker werkend met for loop (niet meer aanspreekbaar)
-		oldlineGraph3.transition()
+        if(!dateBool){
+        	oldlineGraph3.transition()
 			.attr("d", lineFunction(oldlineData[2]));
-		oldlineGraph2.transition()
+			oldlineGraph2.transition()
 			.attr("d", lineFunction(oldlineData[1]));
-		oldlineGraph1.transition()
+			oldlineGraph1.transition()
 			.attr("d", lineFunction(oldlineData[0]));
+        }
+        else{
+        	oldlineGraph3.transition()
+			.attr("d", lineFunction(lineData[2]));
+			oldlineGraph2.transition()
+			.attr("d", lineFunction(lineData[1]));
+			oldlineGraph1.transition()
+			.attr("d", lineFunction(lineData[0]));
+        }
+		
 	
 		lineGraph3.transition()
 			.attr("d", lineFunction(lineData[2]));
@@ -384,7 +397,7 @@ var BezierClock = function(container, data, options){
 			var d = new Date(Date.now());
 
 			if (d.getHours() > currentTime || (d.getHours == 0 && currentTime == 23)){
-				clockHand.transition().attr( 'transform' , 'rotate('+scaleCalc( d.getHours() )+') translate(0,'+ -( o.centerRadius+o.centerWidth+11 ) +') scale(4)');
+				clockHand.transition().attr( 'transform' , 'rotate('+scaleCalc( d.getHours() )+') translate(0,'+ -( o.centerRadius+o.centerWidth+12 ) +') scale(4)');
 			}
 			
 			// Also updating currentTime
