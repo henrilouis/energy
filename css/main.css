@@ -39,6 +39,20 @@ html {
     text-shadow: none;
 }
 
+::-webkit-scrollbar{
+    background:none; 
+}
+
+::-webkit-scrollbar-track{
+    background:none;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#666;
+    border-radius:5px;
+    border-top:thin solid #AAA;
+}
+
 /*
  * A better looking default horizontal rule
  */
@@ -131,6 +145,7 @@ textarea {
 .iconContainer.disabled .units{
     display:none;
 }
+
 
 /* ==========================================================================
    Helper classes
