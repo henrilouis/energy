@@ -90,7 +90,7 @@ var BezierClock = function(container, data, options){
 		return d;
 	};
 
-	var maximum = d3.max(dataSum());
+	var maximum = d3.max(dataSum())+10;
 	var circularAmount = 360/data[0][0].length;
 	var hournumber = parseInt(getTime().slice(0, -3));
 	var bezierOffset =o.gap+o.centerRadius+o.centerWidth;

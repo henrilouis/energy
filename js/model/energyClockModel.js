@@ -78,6 +78,7 @@ var EnergyClockModel = function(){
 			else{
 				seasonAddition = 1;
 			}
+			var oldSeasonAddition = seasonAddition;
 
 			//Weekend additions
 			for(x=0; x<7; x++){
@@ -105,6 +106,13 @@ var EnergyClockModel = function(){
 
 					data[i*7+x].push([]);
 					for(k=0; k<3; k++){
+						if(k==2)
+						{	
+							seasonAddition = 0;
+						}
+						else{
+							seasonAddition = oldSeasonAddition;
+						}
 						data[i*7+x][j].push([]);
 						for(l=0; l<24; l++){
 							//add some variability to start and end of different day times
