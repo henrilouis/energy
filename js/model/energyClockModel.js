@@ -55,22 +55,27 @@ var EnergyClockModel = function(){
 		var	middayAddition = 0;
 		var	eveningAddition = 0;
 		var nightAddition = 0;
-		for(i=0; i<52; i++){
+		for(i=0; i<51; i++){
 			data.push([],[],[],[],[],[],[]);
-			//weekdays:
+			
+			var date = new Date();
+			var dayOfWeek =date.getDay();
+			var difference = 7-dayOfWeek;
+
 			for(x=0; x<7; x++){
 
-				if(x<5){
+				if(x == difference-1 || x == difference-2){
+					morningAddition = -5;
+					middayAddition = 5;
+					eveningAddition = 5;
+					nightAddition = 3;					
+				}
+				else{
 					nightAddition = 0;
 					morningAddition = 0;
 					middayAddition = 0;
 					eveningAddition = 0;
-				}
-				else{
-					morningAddition = -5;
-					middayAddition = 5;
-					eveningAddition = 5;
-					nightAddition = 3;
+
 				}
 
 					for(j=0; j<3; j++){
@@ -78,7 +83,7 @@ var EnergyClockModel = function(){
 					for(k=0; k<3; k++){
 						data[i*7+x][j].push([]);
 						for(l=0; l<24; l++){
-							if(i == 355){
+							if(i*7+x == 356){
 								var date = new Date();
 								if(l>date.getHours() && j==0){
 									data[i*7+x][j][k].push(0);
