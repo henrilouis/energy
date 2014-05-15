@@ -49,6 +49,7 @@ var EnergyClockModel = function(){
 	var createRandomData = function(){
 		data = [];
 		var	morningAddition = 0;
+		var	lateMorningAddition = 0;
 		var	middayAddition = 0;
 		var	eveningAddition = 0;
 		var nightAddition = 0;
@@ -82,16 +83,21 @@ var EnergyClockModel = function(){
 			for(x=0; x<7; x++){
 
 				if(x == difference-1 || x == difference-2){
+
 					morningAddition = -5;
-					middayAddition = 5;
+					latemorningAddition = -5;
+					middayAddition = 6;
 					eveningAddition = 5;
-					nightAddition = 3;					
+					lateEveningAddition = 5;
+					nightAddition = 2;					
 				}
 				else{
-					nightAddition = 0;
 					morningAddition = 0;
+					latemorningAddition = 0;
 					middayAddition = 0;
 					eveningAddition = 0;
+					lateEveningAddition = 0;
+					nightAddition = 0;
 
 				}
 
@@ -101,45 +107,60 @@ var EnergyClockModel = function(){
 					for(k=0; k<3; k++){
 						data[i*7+x][j].push([]);
 						for(l=0; l<24; l++){
+							//add some variability to start and end of different day times
+							var dayvariation=parseInt(Math.random()*3-3);
+
 							if(i*7+x == 356){
 								var date = new Date();
 								if(l>date.getHours() && j==0){
 									data[i*7+x][j][k].push(0);
 								}
 								else{
-
-									if(l<6){
-										data[i*7+x][j][k].push((Math.random()*(3+nightAddition+seasonAddition)));
+									if(l<4+dayvariation){
+										data[i*7+x][j][k].push((Math.random()*(3+lateEveningAddition+seasonAddition))+1);
 									}
-									else if(l > 5 && l < 9){
+									else if(l > 3+dayvariation && l < 6+dayvariation){
+										data[i*7+x][j][k].push((Math.random()*(3+nightAddition+seasonAddition))+1);
+									}
+									else if(l > 5+dayvariation && l < 9+dayvariation){
 										data[i*7+x][j][k].push((Math.random()*(10+morningAddition+seasonAddition))+1);
 									}
-									else if(l > 8 && l < 18){
+									else if(l > 8+dayvariation && l < 12+dayvariation){
+										data[i*7+x][j][k].push((Math.random()*(10+latemorningAddition+seasonAddition))+1);
+									}
+									else if(l > 11+dayvariation && l < 18+dayvariation){
 										data[i*7+x][j][k].push((Math.random()*(4+middayAddition+seasonAddition))+1);
 									}
-									else if(l > 17 && l < 22){
+									else if(l > 17+dayvariation && l < 22+dayvariation){
 										data[i*7+x][j][k].push((Math.random()*(10+eveningAddition+seasonAddition))+1);
 									}
-									else if(l > 21 && l < 25){
+									else if(l > 21+dayvariation && l < 25){
 										data[i*7+x][j][k].push((Math.random()*(8+eveningAddition+seasonAddition))+1);
 									}
+
 									
 								}
 							}
 							else{
-									if(l<6){
-										data[i*7+x][j][k].push((Math.random()*(3+nightAddition+seasonAddition)));
+									if(l<4+dayvariation){
+										data[i*7+x][j][k].push((Math.random()*(3+lateEveningAddition+seasonAddition))+1);
 									}
-									else if(l > 5 && l < 9){
+									else if(l > 3+dayvariation && l < 6+dayvariation){
+										data[i*7+x][j][k].push((Math.random()*(3+nightAddition+seasonAddition))+1);
+									}
+									else if(l > 5+dayvariation && l < 9+dayvariation){
 										data[i*7+x][j][k].push((Math.random()*(10+morningAddition+seasonAddition))+1);
 									}
-									else if(l > 8 && l < 18){
+									else if(l > 8+dayvariation && l < 12+dayvariation){
+										data[i*7+x][j][k].push((Math.random()*(10+latemorningAddition+seasonAddition))+1);
+									}
+									else if(l > 11+dayvariation && l < 18+dayvariation){
 										data[i*7+x][j][k].push((Math.random()*(4+middayAddition+seasonAddition))+1);
 									}
-									else if(l > 17 && l < 22){
+									else if(l > 17+dayvariation && l < 22+dayvariation){
 										data[i*7+x][j][k].push((Math.random()*(10+eveningAddition+seasonAddition))+1);
 									}
-									else if(l > 21 && l < 25){
+									else if(l > 21+dayvariation && l < 25){
 										data[i*7+x][j][k].push((Math.random()*(8+eveningAddition+seasonAddition))+1);
 									}
 							}
