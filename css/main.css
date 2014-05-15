@@ -48,9 +48,17 @@ html {
 }
 
 ::-webkit-scrollbar-thumb{
-    background:#666;
+    
     border-radius:5px;
-    border-top:thin solid #AAA;
+    background: #e25942; /* Old browsers */
+    background: -moz-linear-gradient(top,  #e25942 0%, #f16f5c 50%, #e25942 51%, #e25942 71%, #e25942 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e25942), color-stop(50%,#f16f5c), color-stop(51%,#e25942), color-stop(71%,#e25942), color-stop(100%,#e25942)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #e25942 0%,#f16f5c 50%,#e25942 51%,#e25942 71%,#e25942 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #e25942 0%,#f16f5c 50%,#e25942 51%,#e25942 71%,#e25942 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #e25942 0%,#f16f5c 50%,#e25942 51%,#e25942 71%,#e25942 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #e25942 0%,#f16f5c 50%,#e25942 51%,#e25942 71%,#e25942 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e25942', endColorstr='#e25942',GradientType=0 ); /* IE6-9 */
+
 }
 
 /*
@@ -110,6 +118,10 @@ textarea {
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
+
+body{
+    background-color:#efefef;
+}
 
 #energyClock{
     width:770px;

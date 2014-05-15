@@ -10,10 +10,6 @@ var CalendarView = function(container,model,parent){
 		squarePadding			: 0,
 		squareMargin			: 1,
 		domainOffset 			: 0,
-		selectionPadding		: 10,
-		backgroundColor			: "#FFFFFF",
-		fontColor				: "#EFEFEF",
-		handColor				: "#E25942",
 		colors					: ["rgba(226, 89, 66, 0.2)","rgba(226, 89, 66, 0.4)","rgba(226, 89, 66, 0.6)","rgba(226, 89, 66, 0.8)","rgba(226, 89, 66, 1)"]
 
 	};

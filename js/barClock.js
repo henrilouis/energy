@@ -34,42 +34,6 @@ var BarClock = function(container, data, options){
 	var o = options;
 
 	/*****************************************
-				Public functions
-	*****************************************/
-
-	var dateToggle = function(value){
-		dateBool = value;
-		clockUpdate();
-	}
-
-	var selectDate = function(date){
-		selectedDate = date;
-		clockUpdate();
-	}
-
-	var toggleNightMode = function(){
-		
-		if(nightMode){
-			energyClock.style('background',o.backgroundColor);
-			backgroundCircle.style("fill",o.backgroundColor);
-			clockTime.style('fill',o.fontColor);
-			nightMode = false;
-		}else{
-			energyClock.style('background',o.nightBackgroundColor);
-			backgroundCircle.style("fill",o.nightBackgroundColor);
-			clockTime.style('fill',o.nightFontColor);
-			nightMode = true;
-		}
-
-	}
-	
-	this.drawClock 				= drawClock;
-	this.update 				= update;
-	this.dateToggle				= dateToggle;
-	this.selectDate				= selectDate;
-	this.toggleNightMode		= toggleNightMode;
-
-	/*****************************************
 				Helper variables
 	*****************************************/
 
@@ -255,4 +219,39 @@ var BarClock = function(container, data, options){
 	}
 	setInterval(clockUpdate,1000)
 
+	/*****************************************
+				Public functions
+	*****************************************/
+
+	var dateToggle = function(value){
+		dateBool = value;
+		clockUpdate();
+	}
+
+	var selectDate = function(date){
+		selectedDate = date;
+		clockUpdate();
+	}
+
+	var toggleNightMode = function(){
+		
+		if(nightMode){
+			energyClock.style('background',o.backgroundColor);
+			backgroundCircle.style("fill",o.backgroundColor);
+			clockTime.style('fill',o.fontColor);
+			nightMode = false;
+		}else{
+			energyClock.style('background',o.nightBackgroundColor);
+			backgroundCircle.style("fill",o.nightBackgroundColor);
+			clockTime.style('fill',o.nightFontColor);
+			nightMode = true;
+		}
+
+	}
+	
+	this.drawClock 				= drawClock;
+	this.update 				= update;
+	this.dateToggle				= dateToggle;
+	this.selectDate				= selectDate;
+	this.toggleNightMode		= toggleNightMode;
 }

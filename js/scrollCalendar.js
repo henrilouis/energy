@@ -2,7 +2,7 @@ var ScrollCalendar = function(container, options, model){
 
 	var date 					= new Date();
 	var currentTime 			= date.getHours();
-	var scrollCalendarContainer, scrollCalendar, selector, days, items;
+	var scrollCalendarContainer, scrollCalendar, selector, days, items, data, width, max;
 
 	/*****************************************		
 					Options
@@ -10,31 +10,22 @@ var ScrollCalendar = function(container, options, model){
 
 	var defaults = {
 
-		width                   : 250,
-		squareHeight			: 3,
-		squareWidth				: 3,
+		width                   : 400,
+		squareHeight			: 7,
+		squareWidth				: 7,
 		squarePadding			: 0,
-		squareMargin			: 0,
-		domainOffset 			: 10,
-		selectionPadding		: 10,
-		backgroundColor			: "#FFFFFF",
-		fontColor				: "#EFEFEF",
-		handColor				: "#E25942",
+		squareMargin			: 1,
+		domainOffset 			: 0,
 		colors					: ["#ADD5F7","#7FB2F0","#4E7AC7","#35478C","#16193B"]
 
 	};
 
-	var data;
-
 	var options = $.extend(defaults,options);
 	var o = options;
-	var width;
 
 	/*****************************************
 				Helper variables
 	*****************************************/
-
-	var max;
 
 	var getColor = function(value){
 		var colorNumber = Math.round((value / max) * o.colors.length);

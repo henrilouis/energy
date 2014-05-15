@@ -127,13 +127,13 @@ var ClockController = function(view,model){
 		if(dayBool){
 			$(view.dayIcon).show();
 			$(view.nightIcon).hide();
-			$('body').css('background-color','#222222');
+			$('body').css('background-color',view.options.nightBackgroundColor);
 			dayBool = false;
 		}
 		else{
 			$(view.nightIcon).show();
 			$(view.dayIcon).hide();
-			$('body').css('background-color','#FFFFFF');
+			$('body').css('background-color',view.options.backgroundColor);
 			dayBool = true;
 		}
 		view.barClock.toggleNightMode();
