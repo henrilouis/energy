@@ -120,8 +120,11 @@ var ClockView = function(container,model){
 	/********************************************************************************
 							 Public variables and functions
 	********************************************************************************/
-	this.barClock = barClock;
-	this.bezierClock = bezierClock;
+	this.barClock 			= barClock;
+	this.bezierClock 		= bezierClock;
+
+	this.calendarView 		= calendarView;
+	this.calendarController = calendarController;
 
 	this.gasContainer 		= gasContainer;
 	this.elecContainer 		= elecContainer;

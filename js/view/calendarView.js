@@ -129,8 +129,10 @@ var CalendarView = function(container,model,parent){
 		}
 		else if(args == "resend")
 		{
-			convertData(model.getData());
-			scrollCalendar.update(data);
+			if($("#calendar").is(':visible')){
+				convertData(model.getData());
+				scrollCalendar.update(data);
+			}
 		}
 		
 	}

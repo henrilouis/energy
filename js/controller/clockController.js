@@ -66,6 +66,7 @@ var ClockController = function(view,model){
 				.style('font-size','30px');
 			}
 			$("#scrollCalendarContainer").scrollLeft($("#scrollCalendar").width());
+			view.calendarView.update("resend");
 			
 		}
 		else{
