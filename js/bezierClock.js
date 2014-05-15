@@ -302,6 +302,11 @@ var BezierClock = function(container, data, options){
   	
         //kan effiecienter maar kreeg het niet lekker werkend met for loop (niet meer aanspreekbaar)
         if(!dateBool){
+
+        	oldlineGraph1.style('opacity','0.2');
+        	oldlineGraph2.style('opacity','0.2');
+        	oldlineGraph3.style('opacity','0.2');
+
         	oldlineGraph3.transition()
 			.attr("d", lineFunction(oldlineData[2]));
 			oldlineGraph2.transition()
@@ -310,12 +315,9 @@ var BezierClock = function(container, data, options){
 			.attr("d", lineFunction(oldlineData[0]));
         }
         else{
-        	oldlineGraph3.transition()
-			.attr("d", lineFunction(lineData[2]));
-			oldlineGraph2.transition()
-			.attr("d", lineFunction(lineData[1]));
-			oldlineGraph1.transition()
-			.attr("d", lineFunction(lineData[0]));
+        	oldlineGraph1.style('opacity','0');
+        	oldlineGraph2.style('opacity','0');
+        	oldlineGraph3.style('opacity','0');
         }
 		
 	
