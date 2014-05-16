@@ -100,7 +100,7 @@ var CalendarView = function(container,model,parent){
 
 			$("#scrollCalendar").click(function(event) {
 
-			    $("html, body").bind("scroll mousedown DOMMouseScroll mousewheel keyup", function(){
+			    $("html, body").bind("scroll mousedown DOMMouseScroll mousewheel keyup touchstart", function(){
 			        $("#scrollCalendarContainer").stop();
 			    });
 

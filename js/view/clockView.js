@@ -26,7 +26,6 @@ var ClockView = function(container,model){
 			centerWidth				: 15,
 			backgroundColor			: "#EFEFEF",
 			fontColor				: "#3F4953",
-			handColor				: "#E25942",
 			mainColor				: "#E25942",
 			colors					: ["#E25942","#F6CB51","#13A89E"],
 			timeFontSize			: 55,

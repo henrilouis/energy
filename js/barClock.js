@@ -21,7 +21,6 @@ var BarClock = function(container, data, options){
 		centerWidth				: 15,
 		backgroundColor			: "#FFFFFF",
 		fontColor				: "#3F4953",
-		handColor				: "#E25942",
 		mainColor				: "#E25942",
 		colors					: ["#E25942","#F6CB51","#13A89E"],
 		nightBackgroundColor    : '#222222',
@@ -114,7 +113,7 @@ var BarClock = function(container, data, options){
 
 					) +')';
 			});
-
+			
 		// give the bars the right colours
 		for(i=0; i<data[0].length; i++){
 			barCharts.select("#bars"+i).selectAll('rect')
@@ -157,7 +156,7 @@ var BarClock = function(container, data, options){
 			.attr('d', function() {
 		        return 'M ' + 0 +' '+ 0 + ' l 4 3 l -8 0 z';
 	      	})
-	      	.style( 'fill',o.handColor );
+	      	.style( 'fill',o.mainColor );
 
 	    clockTime = centerPiece.append( "text" )
 	    	.attr('class','clockTime')

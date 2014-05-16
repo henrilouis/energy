@@ -25,7 +25,6 @@ var BezierClock = function(container, data, options){
 		centerWidth				: 15,
 		backgroundColor			: "#FFFFFF",
 		fontColor				: "#3F4953",
-		handColor				: "#E25942",
 		mainColor				: "#E25942",
 		colors					: ["#E25942","#F6CB51","#13A89E"],
 		nightBackgroundColor    : '#222222',
