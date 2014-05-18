@@ -1,10 +1,10 @@
 var BarClock = function(container, data, options){
 
 	var date 					= new Date();
+	var currentTime 			= date.getHours();
 	var selectedDate;
 	var dateBool 				= false;
 	var nightMode 				= false;
-	var currentTime 			= date.getHours();
 	var svg, barCharts, centerPiece, backgroundCircle, handArc, arcGradient, clockHand, clockTime, 
 		gasIcon, electricityIcon, waterIcon, gasMeter, electricityMeter, waterMeter;
 
