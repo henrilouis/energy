@@ -15,17 +15,22 @@ $(function()
 			
 			$("#information").animate({
 				bottom: 0
-			},500);
-			$("#hide span").removeClass('glyphicon-chevron-up');
-			$("#hide span").addClass('glyphicon-chevron-down');
+			},500,function(){
+				$("#hide span").removeClass('glyphicon-chevron-up');
+				$("#hide span").addClass('glyphicon-chevron-down');
+			});
+			
 		}
 		else{
+			
 			var height = $("#information").outerHeight(true);
 			$("#information").animate({
 				bottom: -height
-			},500);
-			$("#hide span").removeClass('glyphicon-chevron-down');
-			$("#hide span").addClass('glyphicon-chevron-up');
+			},500,function(){
+				$("#hide span").removeClass('glyphicon-chevron-down');
+				$("#hide span").addClass('glyphicon-chevron-up');
+			});
+			
 		}
 	});
 
