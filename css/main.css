@@ -121,6 +121,7 @@ textarea {
 
 body{
     background-color:#efefef;
+    overflow:hidden;
 }
 
 #energyClock{
@@ -158,6 +159,37 @@ body{
     display:none;
 }
 
+#information{
+    position: absolute;
+    bottom: 0px;
+    text-align: center;
+    width: 100%;
+}
+
+#infotext{
+    background: rgba(1,1,1,0.4);
+    color: #fff;
+    padding: 30px 40px;
+    margin: auto;
+    width: 600px;
+    position: relative;
+    text-align: justify;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+#information #hide{
+    text-align: center;
+    margin-top: -57px;
+    position: absolute;
+    margin-left: 221px;
+    width: 75px;
+    height: 27px;
+    background: rgba(1,1,1,0.4);
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    padding-top: 6px;
+}
 
 /* ==========================================================================
    Helper classes

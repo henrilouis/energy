@@ -113,7 +113,7 @@ var BarClock = function(container, data, options){
 
 					) +')';
 			});
-			
+				
 		// give the bars the right colours
 		for(i=0; i<data[0].length; i++){
 			barCharts.select("#bars"+i).selectAll('rect')

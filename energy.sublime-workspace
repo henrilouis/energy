@@ -179,8 +179,16 @@
 			"file": "js/barClock.js",
 			"settings":
 			{
-				"buffer_size": 7277,
+				"buffer_size": 7278,
 				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "js/main.js",
+			"settings":
+			{
+				"buffer_size": 177,
+				"line_ending": "Unix"
 			}
 		},
 		{
@@ -256,12 +264,12 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Henri/Dropbox/GitHub/energy/js/bezierClock.js",
 		"/C/Users/Henri/Dropbox/GitHub/energy/cache.manifest",
 		"/C/Users/Henri/Dropbox/GitHub/energy/.htaccess",
 		"/C/Users/Henri/Dropbox/GitHub/energy/css/main.css",
 		"/C/Users/Henri/Dropbox/GitHub/energy/humans.txt",
 		"/C/Users/Henri/Dropbox/GitHub/energy/js/controller/calendarController.js",
-		"/C/Users/Henri/Dropbox/GitHub/energy/js/bezierClock.js",
 		"/C/Users/Henri/Dropbox/GitHub/energy/js/main.js",
 		"/C/Users/Henri/Dropbox/GitHub/energy/js/barClock.js",
 		"/C/Users/Henri/Dropbox/GitHub/energy/js/view/clockView.js",
@@ -318,6 +326,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"date",
+			"currentTime",
 			"maincolor",
 			"hand",
 			"handcolor",
@@ -443,9 +453,7 @@
 			"\"magnitude\":",
 			"\"longitude\":",
 			"{\"latitude\":",
-			"png",
-			".jpg",
-			".gif"
+			"png"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -463,7 +471,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 6,
 			"sheets":
 			[
 				{
@@ -496,14 +504,8 @@
 						"translation.y": 126.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 5,
 					"type": "text"
-				},
-				{
-					"file": "apple-touch-icon-precomposed.png",
-					"semi_transient": true,
-					"stack_index": 1,
-					"type": "image"
 				},
 				{
 					"buffer": 1,
@@ -518,8 +520,8 @@
 						"selection":
 						[
 							[
-								879,
-								879
+								7662,
+								7662
 							]
 						],
 						"settings":
@@ -531,10 +533,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2058.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 9,
 					"type": "text"
 				},
 				{
@@ -566,7 +568,7 @@
 						"translation.y": 672.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 8,
 					"type": "text"
 				},
 				{
@@ -599,7 +601,7 @@
 						"translation.y": 455.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
@@ -615,8 +617,8 @@
 						"selection":
 						[
 							[
-								3560,
-								3560
+								2914,
+								2914
 							]
 						],
 						"settings":
@@ -624,13 +626,14 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1260.0,
+						"translation.y": 1253.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
@@ -646,8 +649,8 @@
 						"selection":
 						[
 							[
-								3516,
-								3516
+								616,
+								616
 							]
 						],
 						"settings":
@@ -662,7 +665,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 9,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -678,39 +681,8 @@
 						"selection":
 						[
 							[
-								383,
-								383
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 2814.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "js/barClock.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 7277,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								596,
-								598
+								779,
+								779
 							]
 						],
 						"settings":
@@ -725,24 +697,24 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 8,
-					"file": "js/bezierClock.js",
+					"buffer": 7,
+					"file": "js/barClock.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 14475,
+						"buffer_size": 7278,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								774,
-								774
+								2864,
+								2864
 							]
 						],
 						"settings":
@@ -754,10 +726,72 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 90.0,
+						"translation.y": 1134.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "js/main.js",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 177,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "js/bezierClock.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 14475,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6501,
+								6501
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 2814.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
 					"type": "text"
 				}
 			]
