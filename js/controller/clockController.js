@@ -113,6 +113,10 @@ var ClockController = function(view,model){
 	********************************************************************************/
 
 	view.graphicSwitch.click(function(event) {
+		modeSwitch();
+	});
+
+	var modeSwitch = function(){
 		if(dayBool){
 			$(view.dayIcon).show();
 			$(view.nightIcon).hide();
@@ -127,6 +131,8 @@ var ClockController = function(view,model){
 		}
 		view.barClock.toggleNightMode();
 		view.bezierClock.toggleNightMode();
-	});
+	}
+
+	modeSwitch();
 	
 }

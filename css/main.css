@@ -192,6 +192,10 @@ body{
     padding-top: 6px;
 }
 
+#bezierEnergyClock path, #barEnergyClock rect, div#scrollCalendar g{
+    cursor:pointer;
+}
+
 /* ==========================================================================
    Helper classes
    ========================================================================== */
